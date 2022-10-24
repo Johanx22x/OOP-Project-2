@@ -60,7 +60,7 @@ public class Score extends JFrame implements ActionListener {
         txtPlayer1.setForeground(Color.BLACK);
         txtPlayer1.setEditable(false);
         txtPlayer1.setHorizontalAlignment(JTextField.CENTER);
-        txtPlayer1.setText(App.player1.getScore());
+        txtPlayer1.setText(App.getPlayer1().getScore());
         background.add(txtPlayer1);
 
         txtPlayer2.setBounds(300, 110, 100, 50);
@@ -68,7 +68,7 @@ public class Score extends JFrame implements ActionListener {
         txtPlayer2.setForeground(Color.BLACK);
         txtPlayer2.setEditable(false);
         txtPlayer2.setHorizontalAlignment(JTextField.CENTER);
-        txtPlayer2.setText(App.player2.getScore());
+        txtPlayer2.setText(App.getPlayer2().getScore());
         background.add(txtPlayer2);
 
         txtPlayer3.setBounds(300, 170, 100, 50);
@@ -76,7 +76,7 @@ public class Score extends JFrame implements ActionListener {
         txtPlayer3.setForeground(Color.BLACK);
         txtPlayer3.setEditable(false);
         txtPlayer3.setHorizontalAlignment(JTextField.CENTER);
-        txtPlayer3.setText(App.player3.getScore());
+        txtPlayer3.setText(App.getPlayer3().getScore());
         background.add(txtPlayer3);
 
         txtPlayer4.setBounds(300, 230, 100, 50);
@@ -84,7 +84,7 @@ public class Score extends JFrame implements ActionListener {
         txtPlayer4.setForeground(Color.BLACK);
         txtPlayer4.setEditable(false);
         txtPlayer4.setHorizontalAlignment(JTextField.CENTER);
-        txtPlayer4.setText(App.player4.getScore());
+        txtPlayer4.setText(App.getPlayer4().getScore());
         background.add(txtPlayer4);
 
         // Add the exit button
