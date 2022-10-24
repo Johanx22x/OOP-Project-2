@@ -9,5 +9,5 @@ all:
 clean:
 	rm -f $(CLASS)/*.class
 
-run:
+run: all
 	$(JAVA) -cp $(CLASS) Main
