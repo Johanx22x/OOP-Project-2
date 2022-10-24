@@ -1,12 +1,13 @@
-JAVA=./src
-JAVAC=javac 
+SRC=./src
 CLASS=./lib
+JAVAC=javac 
+JAVA=java
 
 all: 
-	$(JAVAC) -d $(CLASS) $(JAVA)/*.java
+	$(JAVAC) -d $(CLASS) $(SRC)/*.java
 
 clean:
 	rm -f $(CLASS)/*.class
 
 run:
-	java -cp $(CLASS) Main
+	$(JAVA) -cp $(CLASS) Main
