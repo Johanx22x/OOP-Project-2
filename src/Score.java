@@ -62,7 +62,7 @@ public class Score extends JFrame implements ActionListener {
         txtPlayer1.setHorizontalAlignment(JTextField.CENTER);
         Player player1 = App.getPlayer1();
         if (player1 != null) {
-            txtPlayer1.setText(player1.getScore());
+            txtPlayer1.setText(player1.getScore().toString());
         } else {
             txtPlayer1.setText("0");
         }
@@ -75,7 +75,7 @@ public class Score extends JFrame implements ActionListener {
         txtPlayer2.setHorizontalAlignment(JTextField.CENTER);
         Player player2 = App.getPlayer2();
         if (player2 != null) {
-            txtPlayer2.setText(player2.getScore());
+            txtPlayer2.setText(player2.getScore().toString());
         } else {
             txtPlayer2.setText("0");
         }
@@ -88,7 +88,7 @@ public class Score extends JFrame implements ActionListener {
         txtPlayer3.setHorizontalAlignment(JTextField.CENTER);
         Player player3 = App.getPlayer3();
         if (player3 != null) {
-            txtPlayer3.setText(player3.getScore());
+            txtPlayer3.setText(player3.getScore().toString());
         } else {
             txtPlayer3.setText("0");
         }
@@ -101,7 +101,7 @@ public class Score extends JFrame implements ActionListener {
         txtPlayer4.setHorizontalAlignment(JTextField.CENTER);
         Player player4 = App.getPlayer4();
         if (player4 != null) {
-            txtPlayer4.setText(player4.getScore());
+            txtPlayer4.setText(player4.getScore().toString());
         } else {
             txtPlayer4.setText("0");
         }
