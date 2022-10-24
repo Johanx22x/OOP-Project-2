@@ -40,6 +40,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         }
         add(grid);
 
+        // Add the exit button
         exitButton.addActionListener(this);
         add(exitButton);
     }

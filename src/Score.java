@@ -2,6 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * This class is used to display the score of the game.
+ *
+ * @author Johan Rodriguez
+ * @version 1.0
+ */
 public class Score extends JFrame implements ActionListener {
     JButton btnExit = new JButton("Exit");
 
@@ -17,7 +23,11 @@ public class Score extends JFrame implements ActionListener {
     JTextField txtPlayer3 = new JTextField();
     JTextField txtPlayer4 = new JTextField();
 
+    /**
+     * Constructor for objects of class Score
+     */
     public Score() {
+        // Set frame properties
         super("Score");
         setSize(600, 370);
         setResizable(false);
@@ -117,6 +127,11 @@ public class Score extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    /**
+     * This method is used to handle the events of the buttons.
+     *
+     * @param e The event that is triggered.
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnExit) {
             this.dispose();

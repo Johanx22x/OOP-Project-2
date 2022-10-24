@@ -1,14 +1,30 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+/**
+ * Class to manage the menu Frame for the application.
+ *
+ * @author Johan Rodriguez
+ * @version 1.0
+ */
 public class Menu extends JFrame implements ActionListener {
-    private JLabel lblWelcome = new JLabel("Welcome!");
-    private JButton btnExit = new JButton("Exit");
-    private JButton btnTicTacToe = new JButton("Tic Tac Toe");
-    private JButton btnScore = new JButton("Score");
+    private final JLabel lblWelcome = new JLabel("Welcome!");
+    private final JButton btnExit = new JButton("Exit");
+    private final JButton btnTicTacToe = new JButton("Tic Tac Toe");
+    private final JButton btnScore = new JButton("Score");
 
+    /**
+     * Constructor for objects of class Menu
+     */
     public Menu() {
+        // Set frame properties
         super("Main Menu");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -16,8 +32,8 @@ public class Menu extends JFrame implements ActionListener {
         setResizable(false);
 
         // Add an image to the background
-        ImageIcon img = new ImageIcon("img/background.jpg");
-        JLabel background = new JLabel("", img, JLabel.CENTER);
+        final ImageIcon img = new ImageIcon("img/background.jpg");
+        final JLabel background = new JLabel("", img, JLabel.CENTER);
         background.setBounds(0, 0, 500, 500);
         add(background);
 
@@ -51,14 +67,22 @@ public class Menu extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
+    /**
+     * Method to handle the events of the buttons
+     *
+     * @param e The event
+     */
+    public void actionPerformed(final ActionEvent e) {
+        final String command = e.getActionCommand();
 
         if (command.equals("Exit")) {
+            // Exit the application
             System.exit(0);
         } else if (command.equals("Tic Tac Toe")) {
+            // Open the Tic Tac Toe game
             new TicTacToe();
         } else if (command.equals("Score")) {
+            // Open the score frame
             new Score();
         }
     }
