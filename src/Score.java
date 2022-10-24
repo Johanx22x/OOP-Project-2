@@ -60,7 +60,12 @@ public class Score extends JFrame implements ActionListener {
         txtPlayer1.setForeground(Color.BLACK);
         txtPlayer1.setEditable(false);
         txtPlayer1.setHorizontalAlignment(JTextField.CENTER);
-        txtPlayer1.setText(App.getPlayer1().getScore());
+        Player player1 = App.getPlayer1();
+        if (player1 != null) {
+            txtPlayer1.setText(player1.getScore());
+        } else {
+            txtPlayer1.setText("0");
+        }
         background.add(txtPlayer1);
 
         txtPlayer2.setBounds(300, 110, 100, 50);
@@ -68,7 +73,12 @@ public class Score extends JFrame implements ActionListener {
         txtPlayer2.setForeground(Color.BLACK);
         txtPlayer2.setEditable(false);
         txtPlayer2.setHorizontalAlignment(JTextField.CENTER);
-        txtPlayer2.setText(App.getPlayer2().getScore());
+        Player player2 = App.getPlayer2();
+        if (player2 != null) {
+            txtPlayer2.setText(player2.getScore());
+        } else {
+            txtPlayer2.setText("0");
+        }
         background.add(txtPlayer2);
 
         txtPlayer3.setBounds(300, 170, 100, 50);
@@ -76,7 +86,12 @@ public class Score extends JFrame implements ActionListener {
         txtPlayer3.setForeground(Color.BLACK);
         txtPlayer3.setEditable(false);
         txtPlayer3.setHorizontalAlignment(JTextField.CENTER);
-        txtPlayer3.setText(App.getPlayer3().getScore());
+        Player player3 = App.getPlayer3();
+        if (player3 != null) {
+            txtPlayer3.setText(player3.getScore());
+        } else {
+            txtPlayer3.setText("0");
+        }
         background.add(txtPlayer3);
 
         txtPlayer4.setBounds(300, 230, 100, 50);
@@ -84,7 +99,12 @@ public class Score extends JFrame implements ActionListener {
         txtPlayer4.setForeground(Color.BLACK);
         txtPlayer4.setEditable(false);
         txtPlayer4.setHorizontalAlignment(JTextField.CENTER);
-        txtPlayer4.setText(App.getPlayer4().getScore());
+        Player player4 = App.getPlayer4();
+        if (player4 != null) {
+            txtPlayer4.setText(player4.getScore());
+        } else {
+            txtPlayer4.setText("0");
+        }
         background.add(txtPlayer4);
 
         // Add the exit button
