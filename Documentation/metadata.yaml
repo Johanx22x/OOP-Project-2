@@ -1,0 +1,17 @@
+author: Nombre Autor
+title: Titulo reporte
+lang: es
+
+documentclass: ./lib/apa7tec
+classoption:
+  - stu
+  - helv
+  - longtable
+
+header-includes: |
+  \affiliation{Instituto Tecnologico de Costa Rica}
+  \course{Curso}
+  \professor{Profesor}
+  \duedate{Año}
+  \venue{Sede San Carlos}
+  \mes{Mes}
