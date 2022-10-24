@@ -8,19 +8,19 @@ public class App {
         new Menu();
     }
 
-    public static getPlayer1() {
+    public static Player getPlayer1() {
         return player1;
     }
 
-    public static getPlayer2() {
+    public static Player getPlayer2() {
         return player2;
     }
 
-    public static getPlayer3() {
+    public static Player getPlayer3() {
         return player3;
     }
 
-    public static getPlayer4() {
+    public static Player getPlayer4() {
         return player4;
     }
 }
