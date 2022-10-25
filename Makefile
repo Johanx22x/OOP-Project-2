@@ -7,7 +7,7 @@ all:
 	$(JAVAC) -d $(CLASS) $(SRC)/**/*.java $(SRC)/*.java
 
 clean:
-	rm -f $(CLASS)/*.class
+	rm -rf $(CLASS)/*
 
 run: all
 	$(JAVA) -cp $(CLASS) Main
