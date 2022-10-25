@@ -4,7 +4,7 @@ JAVAC=javac
 JAVA=java
 
 all: 
-	$(JAVAC) -d $(CLASS) $(SRC)/*.java
+	$(JAVAC) -d $(CLASS) $(SRC)/**/*.java $(SRC)/*.java
 
 clean:
 	rm -f $(CLASS)/*.class

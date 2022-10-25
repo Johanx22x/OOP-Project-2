@@ -1,3 +1,5 @@
+import frame.GameCenter;
+
 /**
  * Main class of the program, here the program starts.
  *
@@ -7,6 +9,6 @@
 public class Main {
     // Main method of the program
     public static void main(String[] args) {
-        new App();
+        new GameCenter();
     }
 }

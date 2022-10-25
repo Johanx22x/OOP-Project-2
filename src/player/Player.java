@@ -1,3 +1,5 @@
+package player;
+
 /**
  * Class Player - a player in a game. 
  *

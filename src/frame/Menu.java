@@ -1,3 +1,5 @@
+package frame;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -7,6 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import juego1.TicTacToe;
 
 /**
  * Class to manage the menu Frame for the application.
