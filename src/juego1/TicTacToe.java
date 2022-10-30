@@ -4,16 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import interfaces.iJuego;
+import interfaces.iJugador;
+
 /**
  * TicTacToe game main class, here we create the game board and the game logic.
  *
  * @author Johan Rodriguez
  * @version 1.0
  */
-public class TicTacToe extends JFrame implements ActionListener {
-    private JButton exitButton = new JButton("Exit");
-    private JButton[][] buttons = new JButton[3][3];
-    private int[][] board = new int[3][3];
+public class TicTacToe extends JFrame implements ActionListener, iJuego {
+    private final String gameTitle = "Tic Tac Toe";
+    private final String gameDescription = "Tic Tac Toe game made with Java"; // TODO: Change this
+    private final JButton exitButton = new JButton("Exit");
+    private final JButton[][] buttons = new JButton[3][3];
+    private final int[][] board = new int[3][3];
     private boolean gameOver = false;
     private int turn = 0;
 
@@ -29,7 +34,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         setVisible(true);
 
         // Add a grid with the buttons
-        JPanel grid = new JPanel();
+        final JPanel grid = new JPanel();
         grid.setLayout(new GridLayout(3, 3));
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -47,13 +52,29 @@ public class TicTacToe extends JFrame implements ActionListener {
         add(exitButton);
     }
 
+    public void iniciarPartida(final iJugador jugador) {
+        new TicTacToe();
+    }
+
+    public void terminarPartida() {
+        this.dispose();
+    }
+
+    public String getNombre() {
+        return gameTitle;
+    }
+
+    public String getDescripcion() {
+        return gameDescription;
+    }
+
     /**
      * This method is called when a button is pressed.
      *
      * @param e The event that triggered the method.
      */
-    public void actionPerformed(ActionEvent e) {
-        String actionCommand = e.getActionCommand();
+    public void actionPerformed(final ActionEvent e) {
+        final String actionCommand = e.getActionCommand();
 
         // If the exit button is pressed, close the game
         if (actionCommand.equals("Exit")) {
@@ -80,7 +101,7 @@ public class TicTacToe extends JFrame implements ActionListener {
 
         // Check if the game is over
         if (gameOver) {
-            this.dispose();
+            terminarPartida();
         }
 
     }
