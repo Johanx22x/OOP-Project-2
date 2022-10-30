@@ -84,7 +84,8 @@ public class Menu extends JFrame implements ActionListener {
             System.exit(0);
         } else if (command.equals("Tic Tac Toe")) {
             // Open the Tic Tac Toe game
-            new TicTacToe();
+            TicTacToe juego1 = new TicTacToe();
+            juego1.iniciarPartida(null);
         } else if (command.equals("Score")) {
             // Open the score frame
             new Score();

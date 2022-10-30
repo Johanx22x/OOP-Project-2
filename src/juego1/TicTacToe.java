@@ -14,6 +14,7 @@ import interfaces.iJugador;
  * @version 1.0
  */
 public class TicTacToe extends JFrame implements ActionListener, iJuego {
+    private final JFrame game = new JFrame("Tic Tac Toe");
     private final String gameTitle = "Tic Tac Toe";
     private final String gameDescription = "Tic Tac Toe game made with Java"; // TODO: Change this
     private final JButton exitButton = new JButton("Exit");
@@ -26,12 +27,14 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
      * Constructor, here is created the game board and the game logic.
      */
     public TicTacToe() {
-        super("Tic Tac Toe");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new FlowLayout());
-        setResizable(false);
-        setSize(250, 190);
-        setVisible(true);
+    }
+
+    public void game() {
+        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        game.setLayout(new FlowLayout());
+        game.setResizable(false);
+        game.setSize(250, 190);
+        game.setVisible(true);
 
         // Add a grid with the buttons
         final JPanel grid = new JPanel();
@@ -45,19 +48,57 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
                 grid.add(buttons[i][j]);
             }
         }
-        add(grid);
+        game.add(grid);
 
         // Add the exit button
-        exitButton.addActionListener(this);
-        add(exitButton);
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                game.dispose();
+            }
+        });
+        game.add(exitButton);
     }
 
     public void iniciarPartida(final iJugador jugador) {
-        new TicTacToe();
+        // Create a new frame showing the game title and description, an Start button and an Exit button 
+        final JFrame frame = new JFrame("Tic Tac Toe");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new FlowLayout());
+        frame.setResizable(false);
+        frame.setSize(250, 190);
+        frame.setVisible(true);
+
+        // Add the game title 
+        final JLabel title = new JLabel(gameTitle); 
+        title.setFont(new Font("Arial", Font.BOLD, 20)); 
+        frame.add(title); 
+
+        // Add the game description 
+        final JLabel description = new JLabel(gameDescription); 
+        description.setFont(new Font("Arial", Font.PLAIN, 12)); 
+        frame.add(description); 
+
+        // Add the start button 
+        final JButton startButton = new JButton("Start"); 
+        startButton.addActionListener(new ActionListener() { 
+            public void actionPerformed(final ActionEvent e) { 
+                frame.dispose(); 
+                game(); 
+            } 
+        });
+        frame.add(startButton);
+
+        // Add the exit button
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(final ActionEvent e) {
+                frame.dispose();
+            }
+        });
+        frame.add(exitButton);
     }
 
     public void terminarPartida() {
-        this.dispose();
+        game.dispose();
     }
 
     public String getNombre() {
@@ -75,11 +116,6 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
      */
     public void actionPerformed(final ActionEvent e) {
         final String actionCommand = e.getActionCommand();
-
-        // If the exit button is pressed, close the game
-        if (actionCommand.equals("Exit")) {
-            this.dispose();
-        }
 
         // Check if a button was pressed
         for (int i = 0; i < 3; i++) {
