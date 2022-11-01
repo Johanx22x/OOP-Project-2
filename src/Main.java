@@ -1,4 +1,7 @@
 import frame.GameCenter;
+import login.LoginFrame;
+
+import java.util.HashMap;
 
 /**
  * Main class of the program, here the program starts.
@@ -9,6 +12,17 @@ import frame.GameCenter;
 public class Main {
     // Main method of the program
     public static void main(String[] args) {
-        new GameCenter();
+        LoginFrame.users = LoginFrame.readUsers();
+        LoginFrame login = new LoginFrame();
+
+        while (!login.getLoginSuccess()) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        new GameCenter(login.getUsername());
     }
 }

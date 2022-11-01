@@ -17,8 +17,8 @@ public class GameCenter implements interfaces.iCentroJuego {
     /**
      * Game center constructor
      */
-    public GameCenter() {
-        new Menu();
+    public GameCenter(String username) {
+        new Menu(username);
     }
 
     /**

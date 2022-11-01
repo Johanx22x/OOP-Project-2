@@ -27,7 +27,7 @@ public class Menu extends JFrame implements ActionListener {
     /**
      * Constructor for objects of class Menu
      */
-    public Menu() {
+    public Menu(String username) {
         // Set frame properties
         super("Main Menu");
         setSize(500, 500);
@@ -42,20 +42,21 @@ public class Menu extends JFrame implements ActionListener {
         add(background);
 
         // Add the welcome label
-        lblWelcome.setBounds(175, 50, 150, 50);
+        lblWelcome.setBounds(175, 50, 200, 25);
         lblWelcome.setFont(new Font("Arial", Font.BOLD, 30));
         lblWelcome.setForeground(Color.BLACK);
         background.add(lblWelcome);
 
-        // Add the exit button
-        btnExit.setBounds(200, 400, 100, 50);
-        btnExit.setFont(new Font("Arial", Font.BOLD, 20));
-        btnExit.setForeground(Color.BLACK);
-        btnExit.addActionListener(this);
-        background.add(btnExit);
+        // Add the username label and center it
+        final JLabel lblUsername = new JLabel(username);
+        lblUsername.setBounds(0, 100, 500, 25);
+        lblUsername.setFont(new Font("Arial", Font.BOLD, 25));
+        lblUsername.setForeground(Color.BLACK);
+        lblUsername.setHorizontalAlignment(JLabel.CENTER);
+        background.add(lblUsername);
 
         // Add the Tic Tac Toe button
-        btnTicTacToe.setBounds(175, 125, 150, 50);
+        btnTicTacToe.setBounds(175, 150, 150, 50);
         btnTicTacToe.setFont(new Font("Arial", Font.BOLD, 20));
         btnTicTacToe.setForeground(Color.BLACK);
         btnTicTacToe.addActionListener(this);
@@ -67,6 +68,13 @@ public class Menu extends JFrame implements ActionListener {
         btnScore.setForeground(Color.BLACK);
         btnScore.addActionListener(this);
         background.add(btnScore);
+
+        // Add the exit button
+        btnExit.setBounds(200, 400, 100, 50);
+        btnExit.setFont(new Font("Arial", Font.BOLD, 20));
+        btnExit.setForeground(Color.BLACK);
+        btnExit.addActionListener(this);
+        background.add(btnExit);
 
         setVisible(true);
     }
