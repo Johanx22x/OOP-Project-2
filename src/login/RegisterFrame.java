@@ -93,6 +93,8 @@ public class RegisterFrame extends JFrame implements ActionListener {
             if (username.equals("") || password.equals("") || password2.equals("")) {
                 // If any field is empty
                 JOptionPane.showMessageDialog(null, "Please fill in all fields");
+            } else if (LoginFrame.users.containsKey(username)) { // Check if the username already exists
+                JOptionPane.showMessageDialog(null, "The username already exists", "Error", JOptionPane.ERROR_MESSAGE);
             } else if (!password.equals(password2)) {
                 // If the passwords are not the same
                 JOptionPane.showMessageDialog(null, "Passwords do not match");
