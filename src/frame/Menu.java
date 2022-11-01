@@ -26,6 +26,8 @@ public class Menu extends JFrame implements ActionListener {
 
     /**
      * Constructor for objects of class Menu
+     *
+     * @param username the username of the player
      */
     public Menu(String username) {
         // Set frame properties

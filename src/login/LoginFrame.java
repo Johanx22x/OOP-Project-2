@@ -39,6 +39,7 @@ public class LoginFrame extends JFrame implements ActionListener {
      * Constructor of the class, here the frame is created.
      */
     public LoginFrame() {
+        // Set the frame properties
         super("Login");
         setSize(450, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
