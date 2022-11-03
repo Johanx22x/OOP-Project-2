@@ -26,18 +26,16 @@ import interfaces.iJugador;
  * @version 1.0
  */
 public class Login extends JFrame implements ActionListener {
+    // TODO: Change users accessibility to private
     public static HashMap<String, String> users = new HashMap<String, String>();
     private String username = "";
+    private Boolean loginSuccess = false;
 
-    private JLabel userLabel;
-    private JLabel passwordLabel;
     private JTextField userField;
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton cancelButton;
     private JButton registerButton;
-    private JPanel panel;
-    private Boolean loginSuccess = false;
 
     /**
      * Constructor of the class, here the frame is created.
@@ -45,16 +43,26 @@ public class Login extends JFrame implements ActionListener {
     public Login() {
         // Set the frame properties
         super("Login");
-        setSize(450, 200);
+        setSize(450, 280);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
 
-        userLabel = new JLabel("Username: ");
+        JLabel welcomeLabel = new JLabel("Welcome to the game center!");
+        welcomeLabel.setPreferredSize(new Dimension(400, 35));
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 25));
+        welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        JLabel loginMessageLabel = new JLabel("Please login or register");
+        loginMessageLabel.setPreferredSize(new Dimension(400, 40));
+        loginMessageLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        loginMessageLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        JLabel userLabel = new JLabel("Username: ");
         userLabel.setPreferredSize(new Dimension(150, 40));
         userLabel.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        passwordLabel = new JLabel("Password: ");
+        JLabel passwordLabel = new JLabel("Password: ");
         passwordLabel.setPreferredSize(new Dimension(150, 40));
         passwordLabel.setFont(new Font("Arial", Font.PLAIN, 20));
 
@@ -69,21 +77,22 @@ public class Login extends JFrame implements ActionListener {
         loginButton = new JButton("Login");
         loginButton.setPreferredSize(new Dimension(150, 40));
         loginButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        loginButton.addActionListener(this);
 
         cancelButton = new JButton("Cancel");
         cancelButton.setPreferredSize(new Dimension(150, 40));
         cancelButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        cancelButton.addActionListener(this);
 
         registerButton = new JButton("Register");
         registerButton.setPreferredSize(new Dimension(150, 40));
         registerButton.setFont(new Font("Arial", Font.PLAIN, 20));
-
-        panel = new JPanel();
-
-        loginButton.addActionListener(this);
-        cancelButton.addActionListener(this);
         registerButton.addActionListener(this);
 
+        JPanel panel = new JPanel();
+
+        panel.add(welcomeLabel);
+        panel.add(loginMessageLabel);
         panel.add(userLabel);
         panel.add(userField);
         panel.add(passwordLabel);
@@ -93,6 +102,7 @@ public class Login extends JFrame implements ActionListener {
         panel.add(registerButton);
 
         add(panel);
+
         setVisible(true);
     }
 
@@ -126,7 +136,8 @@ public class Login extends JFrame implements ActionListener {
         } else if (e.getSource() == cancelButton) {
             System.exit(0);
         } else if (e.getSource() == registerButton) {
-            new Register();
+            this.setVisible(false);
+            new Register(this);
         }
     }
 

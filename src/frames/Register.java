@@ -19,18 +19,33 @@ public class Register extends JFrame implements ActionListener {
     private JPasswordField passwordField2;
     private JButton registerButton;
     private JButton cancelButton;
+    private Login loginFrame;
 
     /**
      * Constructor of the class
      */
-    public Register() {
+    public Register(Login loginFrame) {
         // Set the frame characteristics
         super("Register");
-        setSize(450, 200);
+        setSize(450, 270);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
         setLayout(new FlowLayout());
+
+        this.loginFrame = loginFrame;
+
+        // Add a register message label 
+        JLabel registerLabel = new JLabel("Register");
+        registerLabel.setPreferredSize(new Dimension(400, 30));
+        registerLabel.setFont(new Font("Arial", Font.BOLD, 25));
+        registerLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        // Add a please message label 
+        JLabel pleaseLabel = new JLabel("Please enter your username and password");
+        pleaseLabel.setPreferredSize(new Dimension(400, 30));
+        pleaseLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        pleaseLabel.setHorizontalAlignment(JLabel.CENTER);
 
         usernameLabel = new JLabel("Username: ");
         usernameLabel.setPreferredSize(new Dimension(185, 40));
@@ -64,6 +79,8 @@ public class Register extends JFrame implements ActionListener {
         cancelButton.setPreferredSize(new Dimension(150, 40));
         cancelButton.setFont(new Font("Arial", Font.PLAIN, 20));
 
+        add(registerLabel);
+        add(pleaseLabel);
         add(usernameLabel);
         add(usernameField);
         add(passwordLabel);
@@ -104,9 +121,11 @@ public class Register extends JFrame implements ActionListener {
                 Login.writeUsers(Login.users);
                 JOptionPane.showMessageDialog(null, "Registration successful");
                 dispose();
+                loginFrame.setVisible(true);
             }
         } else if (event.getSource() == cancelButton) {
             // Close the frame
+            loginFrame.setVisible(true);
             dispose();
         }
     }
