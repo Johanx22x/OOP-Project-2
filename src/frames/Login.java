@@ -1,4 +1,4 @@
-package login;
+package frames;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -20,12 +20,12 @@ import player.Player;
 import interfaces.iJugador;
 
 /**
- * LoginFrame class, here the user can login or register.
+ * Login class, here the user can login or register.
  *
  * @author Johan Rodriguez
  * @version 1.0
  */
-public class LoginFrame extends JFrame implements ActionListener {
+public class Login extends JFrame implements ActionListener {
     public static HashMap<String, String> users = new HashMap<String, String>();
     private String username = "";
 
@@ -42,7 +42,7 @@ public class LoginFrame extends JFrame implements ActionListener {
     /**
      * Constructor of the class, here the frame is created.
      */
-    public LoginFrame() {
+    public Login() {
         // Set the frame properties
         super("Login");
         setSize(450, 200);
@@ -126,7 +126,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         } else if (e.getSource() == cancelButton) {
             System.exit(0);
         } else if (e.getSource() == registerButton) {
-            new RegisterFrame();
+            new Register();
         }
     }
 
@@ -197,7 +197,7 @@ public class LoginFrame extends JFrame implements ActionListener {
             e.printStackTrace();
         }
 
-        LoginFrame.users = users;
+        Login.users = users;
     }
 
     /**

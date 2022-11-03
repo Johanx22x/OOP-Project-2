@@ -1,4 +1,4 @@
-package login;
+package frames;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -10,7 +10,7 @@ import javax.swing.*;
  * @author Johan Rodriguez
  * @version 1.0
  */
-public class RegisterFrame extends JFrame implements ActionListener {
+public class Register extends JFrame implements ActionListener {
     private JLabel usernameLabel;
     private JLabel passwordLabel;
     private JLabel passwordLabel2;
@@ -23,7 +23,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
     /**
      * Constructor of the class
      */
-    public RegisterFrame() {
+    public Register() {
         // Set the frame characteristics
         super("Register");
         setSize(450, 200);
@@ -93,15 +93,15 @@ public class RegisterFrame extends JFrame implements ActionListener {
             if (username.equals("") || password.equals("") || password2.equals("")) {
                 // If any field is empty
                 JOptionPane.showMessageDialog(null, "Please fill in all fields");
-            } else if (LoginFrame.users.containsKey(username)) { // Check if the username already exists
+            } else if (Login.users.containsKey(username)) { // Check if the username already exists
                 JOptionPane.showMessageDialog(null, "The username already exists", "Error", JOptionPane.ERROR_MESSAGE);
             } else if (!password.equals(password2)) {
                 // If the passwords are not the same
                 JOptionPane.showMessageDialog(null, "Passwords do not match");
             } else {
-                // Add the new user to the LoginFrame HashMap
-                LoginFrame.users.put(username, password);
-                LoginFrame.writeUsers(LoginFrame.users);
+                // Add the new user to the Login HashMap
+                Login.users.put(username, password);
+                Login.writeUsers(Login.users);
                 JOptionPane.showMessageDialog(null, "Registration successful");
                 dispose();
             }

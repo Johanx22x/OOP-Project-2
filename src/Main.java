@@ -1,5 +1,5 @@
-import frame.GameCenter;
-import login.LoginFrame;
+import frames.GameCenter;
+import frames.Login;
 
 import java.util.HashMap;
 
@@ -12,8 +12,8 @@ import java.util.HashMap;
 public class Main {
     // Main method of the program
     public static void main(String[] args) {
-        LoginFrame.readUsers();
-        LoginFrame login = new LoginFrame();
+        Login.readUsers();
+        Login login = new Login();
 
         while (!login.getLoginSuccess()) {
             try {

@@ -1,4 +1,4 @@
-package frame;
+package frames;
 
 import java.util.ArrayList;
 
