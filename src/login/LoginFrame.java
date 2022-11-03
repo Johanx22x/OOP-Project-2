@@ -15,6 +15,10 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.HashMap;
 
+import player.Player;
+
+import interfaces.iJugador;
+
 /**
  * LoginFrame class, here the user can login or register.
  *
@@ -131,8 +135,8 @@ public class LoginFrame extends JFrame implements ActionListener {
      *
      * @return String
      */
-    public String getUsername() {
-        return username;
+    public iJugador getUser() {
+        return new Player(username);
     }
 
     /**
@@ -172,7 +176,7 @@ public class LoginFrame extends JFrame implements ActionListener {
      *
      * @return HashMap with the users
      */
-    public static HashMap<String, String> readUsers() {
+    public static void readUsers() {
         HashMap<String, String> users = new HashMap<>();
 
         // Check the users file
@@ -193,7 +197,7 @@ public class LoginFrame extends JFrame implements ActionListener {
             e.printStackTrace();
         }
 
-        return users;
+        LoginFrame.users = users;
     }
 
     /**

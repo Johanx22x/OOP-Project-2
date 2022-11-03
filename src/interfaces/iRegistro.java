@@ -2,8 +2,7 @@ package interfaces;
 
 import java.time.LocalDateTime;
 
-public interface iRegistro
-{
+public interface iRegistro {
     /**
      * Recupera la fecha/hora de inicio de la partida
      * @return fecha/Hora de inicio de la partida

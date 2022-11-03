@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class Main {
     // Main method of the program
     public static void main(String[] args) {
-        LoginFrame.users = LoginFrame.readUsers();
+        LoginFrame.readUsers();
         LoginFrame login = new LoginFrame();
 
         while (!login.getLoginSuccess()) {
@@ -23,6 +23,6 @@ public class Main {
             }
         }
 
-        new GameCenter(login.getUsername());
+        new GameCenter(login.getUser());
     }
 }

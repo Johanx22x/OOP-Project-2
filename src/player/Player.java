@@ -1,65 +1,55 @@
 package player;
 
+import interfaces.iJugador;
+import interfaces.iRegistro;
+import interfaces.iJuego;
+
+import java.util.ArrayList;
+
 /**
  * Class Player - a player in a game. 
  *
  * @author Johan Rodriguez
  * @version 1.0
  */
-public class Player {
-    private String name;
-    private int score;
+public class Player implements iJugador {
+    private String username;
+    private ArrayList<iRegistro> records;
 
     /**
      * Constructor for objects of class Player
      */
-    public Player(String name) {
-        this.name = name;
-        this.score = 0;
+    public Player(String username) {
+        this.username = username;
     }
 
     /**
-     * Get the name of the player
+     * Get the username of the player
      *
-     * @return The name of the player
+     * @return The username of the player
      */
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return username;
     }
 
     /**
-     * Set the name of the Player
+     * Registra el puntaje obtenido para una determinada partida
      *
-     * @param name The name of the player
+     * @param puntuacion puntuación obtenida
+     * @param juego instancia de juego de la partida
      */
-    public void setName(String name) {
-        this.name = name;
+    public void registrarPuntaje(int puntuacion, iJuego juego) {
+        // TODO:
     }
 
     /**
-     * Get the score of the player
+     * Listado de registros de juego del usuario para un mismo tipo de juego.
      *
-     * @return The score of the player
+     * @param tipoJuego tipo del juego
+     * @return  Registro histórico de partidas.
      */
-    public int getScore() {
-        return score;
-    }
-
-    /**
-     * Set points to the score of the player
-     *
-     * @param points The points to set in the score
-     */
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    /**
-     * Add points to the score of the player
-     *
-     * @param points The points to add to the score
-     */
-    public void addScore(int score) {
-        this.score += score;
+    public ArrayList<iRegistro> estadisticas (iJuego tipoJuego) {
+        // TODO:
+        return null;
     }
 }
