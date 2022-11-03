@@ -27,7 +27,7 @@ public class Register extends JFrame implements ActionListener {
     public Register(Login loginFrame) {
         // Set the frame characteristics
         super("Register");
-        setSize(450, 270);
+        setSize(450, 330);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
