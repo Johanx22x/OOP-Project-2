@@ -1,7 +1,6 @@
 package interfaces;
 
-public interface iJuego 
-{
+public interface iJuego {
     /**
      * Inicializa un juego asociado a un jugador y centro o controlador de juegos.
      * @param jugador jugador quien inicaliza
@@ -10,7 +9,8 @@ public interface iJuego
     public void iniciarPartida(iJugador jugador);
 
     /**
-     * Cierra la partida en juego sin registrar puntaje para el usuario pero si almacena el registro de tiempo desde el inicio ya hasta su finalización
+     * Cierra la partida en juego sin registrar puntaje para el usuario pero si almacena 
+     * el registro de tiempo desde el inicio y hasta su finalización
      * */
     public void terminarPartida();
 

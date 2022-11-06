@@ -48,7 +48,7 @@ public class Player implements iJugador {
      * @param tipoJuego tipo del juego
      * @return  Registro histórico de partidas.
      */
-    public ArrayList<iRegistro> estadisticas (iJuego tipoJuego) {
+    public ArrayList<iRegistro> estadisticas(iJuego tipoJuego) {
         // TODO:
         return null;
     }

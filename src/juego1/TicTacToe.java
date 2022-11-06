@@ -91,17 +91,6 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
         title.setFont(new Font("Arial", Font.BOLD, 40)); 
         frame.add(title); 
 
-        // NOTE: Here is the example of how to show the game description
-        // Add the game description, formating the text to fit the frame 
-        // final JTextArea description = new JTextArea(gameDescription);
-        // description.setPreferredSize(new Dimension(450, 200));
-        // description.setFont(new Font("Arial", Font.PLAIN, 30));
-        // description.setLineWrap(true);
-        // description.setWrapStyleWord(true);
-        // description.setEditable(false);
-        // description.setBackground(frame.getBackground());
-        // frame.add(description);
-
         // Add blank space here 
         final JLabel blankSpace = new JLabel(" ");
         blankSpace.setPreferredSize(new Dimension(450, 25));
