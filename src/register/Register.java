@@ -38,9 +38,8 @@ public class Register implements iRegistro {
      * @param player
      * @param score
      */
-    public Register(iJugador player, int score) {
+    public Register(iJugador player) {
         this.player = player;
-        this.score = score;
     }
 
     /**
@@ -50,6 +49,15 @@ public class Register implements iRegistro {
      */
     public iJuego getTipoJuego() {
         return game;
+    }
+
+    /**
+     * Method that sets the score
+     *
+     * @param score
+     */
+    public void setScore(int score) {
+        this.score = score;
     }
 
     /**
@@ -193,7 +201,8 @@ public class Register implements iRegistro {
                 String data = reader.nextLine();
                 String[] record = data.split(",");
 
-                Register newRecord = new Register(new Player(record[1]), Integer.parseInt(record[4]));
+                Register newRecord = new Register(new Player(record[1]));
+                newRecord.setScore(Integer.parseInt(record[4]));
                 // newRecord.setGame(new Game(record[0])); // TODO: Change this
                 newRecord.setInicio(LocalDateTime.parse(record[2]));
                 newRecord.setFinalizacion(LocalDateTime.parse(record[3]));

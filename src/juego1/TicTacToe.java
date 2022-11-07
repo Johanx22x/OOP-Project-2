@@ -18,127 +18,7 @@ import interfaces.iJugador;
 import interfaces.iRegistro;
 import interfaces.iCentroJuego;
 
-class TicTacToeRegister implements iRegistro {
-    private iJuego game;
-    private LocalDateTime start;
-    private LocalDateTime end;
-    private iJugador player;
-    private int score;
-    private boolean finished = false;
-
-    /**
-     * Constructor of the class
-     * 
-     * @param player
-     * @param score
-     */
-    public TicTacToeRegister(iJugador player) {
-        this.player = player;
-    }
-
-    /**
-     * Method that sets the score of the player 
-     *
-     * @param score
-     */
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    /**
-     * Method that sets the game
-     * 
-     * @param game
-     */
-    public void setGame(iJuego game) {
-        this.game = game;
-    }
-
-    /**
-     * Method that returns the game
-     * 
-     * @return game
-     */
-    public iJuego getTipoJuego() {
-        return game;
-    }
-
-    /**
-     * Recupera la fecha/hora de inicio de la partida
-     *
-     * @return fecha/Hora de inicio de la partida
-     */
-    public LocalDateTime getInicio() {
-        return this.start;
-    }
-
-    /**
-     * Recupera la fecha/hora de finalización de la partida
-     *
-     * @return fecha/hora de finalización del juego
-     */
-    public LocalDateTime getFinalizacion() {
-        return this.end;
-    }
-
-    /**
-     * Asigna la fecha/hora de inicio de la partida
-     *
-     * @param fechaHora fecha/hora de inicio de la partida
-     */
-    public void setInicio(LocalDateTime fechaHora) {
-        this.start = fechaHora;
-    }
-
-    /**
-     * Asigna la fecha/hora de finalización de la partida
-     *
-     * @param fechaHora fecha/hora de finalización de la partida
-     */
-    public void setFinalizacion(LocalDateTime fechaHora) {
-        this.end = fechaHora;
-    }
-
-    /**
-     * Retorna el puntaje obtenido en la partida, null en caso de terminar la partida sin completar.
-     *
-     * @return puntaje obtenido
-     */
-    public int getPuntaje() {
-        return this.score;
-    }
-
-    /**
-     * Retorna el total de segundos transcurridos desde el inicio de la partida y la finalización
-     *
-     * @return  total de segundos
-     */
-    public int getSegundosTotalesPartida() {
-        return (int) Duration.between(this.start, this.end).getSeconds();
-    }
-
-    /**
-     * Retorna el estado de finalización de la partida, True si terminó con éxito la partida y registra puntuación, false si finlaiza la partida sin terminar el juego.
-     *
-     * @return estado de finalización de juego
-     */
-    public boolean getEstadoFinalizado() {
-        return this.finished;
-    }
-
-    /**
-     * Obtiene la instancia del jugador
-     *
-     * @return Jugador
-     */
-    public iJugador getJugador() {
-        return this.player;
-    }
-
-    public void setFinished(Boolean finished) {
-        this.finished = finished;
-    }
-}
+import register.Register;
 
 /**
  * TicTacToe game main class, here we create the game board and the game logic.
@@ -156,7 +36,7 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
     private int turn = 0;
     private int playerTurn = 1;
     private int playerScore = 0;
-    private TicTacToeRegister register;
+    private Register register;
     private iCentroJuego center;
     private iJugador player;
 
@@ -210,7 +90,7 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
      * The user can choose to play or not, and the symbol he wants to use.
      */
     public void iniciarPartida(final iJugador jugador, iCentroJuego centroJuegos) {
-        register = new TicTacToeRegister(jugador);
+        register = new Register(jugador);
         register.setGame(this);
 
         player = jugador;
