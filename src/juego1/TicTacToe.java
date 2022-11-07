@@ -1,6 +1,13 @@
 package juego1;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.Duration;
+import java.time.format.DateTimeFormatter;
+
+import java.util.List;
+import java.util.Comparator;
+import java.util.HashMap;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +15,130 @@ import java.awt.event.*;
 
 import interfaces.iJuego;
 import interfaces.iJugador;
+import interfaces.iRegistro;
+import interfaces.iCentroJuego;
+
+class TicTacToeRegister implements iRegistro {
+    private iJuego game;
+    private LocalDateTime start;
+    private LocalDateTime end;
+    private iJugador player;
+    private int score;
+    private boolean finished = false;
+
+    /**
+     * Constructor of the class
+     * 
+     * @param player
+     * @param score
+     */
+    public TicTacToeRegister(iJugador player) {
+        this.player = player;
+    }
+
+    /**
+     * Method that sets the score of the player 
+     *
+     * @param score
+     */
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    /**
+     * Method that sets the game
+     * 
+     * @param game
+     */
+    public void setGame(iJuego game) {
+        this.game = game;
+    }
+
+    /**
+     * Method that returns the game
+     * 
+     * @return game
+     */
+    public iJuego getTipoJuego() {
+        return game;
+    }
+
+    /**
+     * Recupera la fecha/hora de inicio de la partida
+     *
+     * @return fecha/Hora de inicio de la partida
+     */
+    public LocalDateTime getInicio() {
+        return this.start;
+    }
+
+    /**
+     * Recupera la fecha/hora de finalización de la partida
+     *
+     * @return fecha/hora de finalización del juego
+     */
+    public LocalDateTime getFinalizacion() {
+        return this.end;
+    }
+
+    /**
+     * Asigna la fecha/hora de inicio de la partida
+     *
+     * @param fechaHora fecha/hora de inicio de la partida
+     */
+    public void setInicio(LocalDateTime fechaHora) {
+        this.start = fechaHora;
+    }
+
+    /**
+     * Asigna la fecha/hora de finalización de la partida
+     *
+     * @param fechaHora fecha/hora de finalización de la partida
+     */
+    public void setFinalizacion(LocalDateTime fechaHora) {
+        this.end = fechaHora;
+    }
+
+    /**
+     * Retorna el puntaje obtenido en la partida, null en caso de terminar la partida sin completar.
+     *
+     * @return puntaje obtenido
+     */
+    public int getPuntaje() {
+        return this.score;
+    }
+
+    /**
+     * Retorna el total de segundos transcurridos desde el inicio de la partida y la finalización
+     *
+     * @return  total de segundos
+     */
+    public int getSegundosTotalesPartida() {
+        return (int) Duration.between(this.start, this.end).getSeconds();
+    }
+
+    /**
+     * Retorna el estado de finalización de la partida, True si terminó con éxito la partida y registra puntuación, false si finlaiza la partida sin terminar el juego.
+     *
+     * @return estado de finalización de juego
+     */
+    public boolean getEstadoFinalizado() {
+        return this.finished;
+    }
+
+    /**
+     * Obtiene la instancia del jugador
+     *
+     * @return Jugador
+     */
+    public iJugador getJugador() {
+        return this.player;
+    }
+
+    public void setFinished(Boolean finished) {
+        this.finished = finished;
+    }
+}
 
 /**
  * TicTacToe game main class, here we create the game board and the game logic.
@@ -24,15 +155,16 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
     private final int[][] board = new int[3][3];
     private int turn = 0;
     private int playerTurn = 1;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private int playerScore = 0;
+    private TicTacToeRegister register;
+    private iCentroJuego center;
+    private iJugador player;
 
     /**
      * Method to start the game.
      */
     public void game() {
-        // Start time 
-        startTime = LocalTime.now();
+        register.setInicio(LocalDateTime.now());
 
         game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         game.setLayout(new FlowLayout());
@@ -77,7 +209,13 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
      * Method to show to the user the game name, description and the rules.
      * The user can choose to play or not, and the symbol he wants to use.
      */
-    public void iniciarPartida(final iJugador jugador) {
+    public void iniciarPartida(final iJugador jugador, iCentroJuego centroJuegos) {
+        register = new TicTacToeRegister(jugador);
+        register.setGame(this);
+
+        player = jugador;
+        center = centroJuegos;
+
         // Create a new frame showing the game title and description, an Start button and an Exit button 
         final JFrame frame = new JFrame("Tic Tac Toe");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,7 +238,80 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
         final JButton statsButton = new JButton("Personal Stats");
         statsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // TODO: Show personal stats 
+
+                JFrame statsFrame = new JFrame("Personal Stats");
+                statsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                statsFrame.setLayout(new FlowLayout());
+                statsFrame.setResizable(false);
+                statsFrame.setSize(500, 600);
+
+                // Add a text area to show the stats 
+                JTextArea stats = new JTextArea();
+                stats.setPreferredSize(new Dimension(450, 450));
+                stats.setEditable(false);
+
+                HashMap<LocalDate, Integer> playedDays = new HashMap<LocalDate, Integer>();
+                int totalGames = 0;
+                int totalHours = 0;
+
+                for (iRegistro register: centroJuegos.getRegistros(TicTacToe.this)) {
+                    if (register.getJugador().getNombre().equals(jugador.getNombre())) {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                        stats.append("Start time: " + register.getInicio().format(formatter) + "\n" +
+                                "End time: " + register.getFinalizacion().format(formatter) + "\n" +
+                                "Score: " + register.getPuntaje() + "\n" +
+                                "Total time: " + register.getSegundosTotalesPartida() + " seconds" + "\n" +
+                                "Finished: " + register.getEstadoFinalizado() + "\n\n");
+                        totalGames++;
+                        totalHours += register.getSegundosTotalesPartida();
+
+                        if (playedDays.containsKey(register.getInicio().toLocalDate())) {
+                            playedDays.put(register.getInicio().toLocalDate(), playedDays.get(register.getInicio().toLocalDate()) + 1);
+                        } else {
+                            playedDays.put(register.getInicio().toLocalDate(), 1);
+                        }
+                    }
+                }
+
+                // Show the average time played per day according to the total HashMap
+                int totalDays = 0;
+                for (LocalDate date: playedDays.keySet()) {
+                    totalDays++;
+                }
+                JLabel averageTime;
+                if (totalDays != 0) {
+                    averageTime = new JLabel("Average time played per day: " + totalHours / totalDays + " seconds");
+                } else {
+                    averageTime = new JLabel("Average time played per day: 0 seconds");
+                }
+                averageTime.setPreferredSize(new Dimension(450, 25));
+                statsFrame.add(averageTime);
+
+                JLabel totalGamesLabel = new JLabel("Total games: " + totalGames);
+                totalGamesLabel.setPreferredSize(new Dimension(450, 25));
+                statsFrame.add(totalGamesLabel);
+
+                // Show total hours using hh:mm:ss format 
+                int hours = totalHours / 3600;
+                int minutes = (totalHours % 3600) / 60;
+                int seconds = totalHours % 60;
+                JLabel totalHoursLabel = new JLabel("Total hours: " + String.format("%02d:%02d:%02d", hours, minutes, seconds));
+                totalHoursLabel.setPreferredSize(new Dimension(450, 25));
+                statsFrame.add(totalHoursLabel);
+
+                statsFrame.add(stats);
+
+                JButton exitButton = new JButton("Back");
+                exitButton.setPreferredSize(new Dimension(450, 50));
+                exitButton.setFont(new Font("Arial", Font.BOLD, 20));
+                exitButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        statsFrame.dispose();
+                    }
+                });
+                statsFrame.add(exitButton);
+
+                statsFrame.setVisible(true);
             }
         });
         statsButton.setPreferredSize(new Dimension(300, 50));
@@ -116,7 +327,47 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
         final JButton generalStatsButton = new JButton("General Stats");
         generalStatsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // TODO: Show general stats 
+                JFrame statsFrame = new JFrame("General Stats");
+                statsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                statsFrame.setLayout(new FlowLayout());
+                statsFrame.setResizable(false);
+                statsFrame.setSize(500, 550);
+
+                // Add a text area to show the stats 
+                JTextArea stats = new JTextArea();
+                stats.setPreferredSize(new Dimension(450, 450));
+                stats.setEditable(false);
+
+                // Show only the 10 best scores of centroJuegos.getRegistros(TicTacToe.this)
+                List<iRegistro> registers = centroJuegos.getRegistros(TicTacToe.this);
+                registers.sort(new Comparator<iRegistro>() {
+                    public int compare(iRegistro r1, iRegistro r2) {
+                        return r2.getPuntaje() - r1.getPuntaje();
+                    }
+                });
+                for (int i = 0; i < 10; i++) {
+                    if (i < registers.size()) {
+                        iRegistro register = registers.get(i);
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                        stats.append("Username: " + register.getJugador().getNombre() + "\n" +
+                                "Score: " + register.getPuntaje() + "\n" +
+                                "Date: " + register.getInicio().format(formatter) + "\n\n");
+                    }
+                }
+
+                statsFrame.add(stats);
+
+                JButton exitButton = new JButton("Back");
+                exitButton.setPreferredSize(new Dimension(450, 50));
+                exitButton.setFont(new Font("Arial", Font.BOLD, 20));
+                exitButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        statsFrame.dispose();
+                    }
+                });
+                statsFrame.add(exitButton);
+
+                statsFrame.setVisible(true);
             }
         });
         generalStatsButton.setPreferredSize(new Dimension(300, 50));
@@ -158,6 +409,7 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
                 xButton.setEnabled(false);
             }
         });
+
         // Set the action listener for the O button
         oButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -194,7 +446,13 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
     }
 
     public void terminarPartida() {
-        // TODO: Save the game stats
+        register.setFinalizacion(LocalDateTime.now());
+        register.setScore(playerScore);
+        register.setFinished(true);
+
+        center.addRegistro(register);
+        player.registrarPuntaje(playerScore, this);
+
         game.dispose();
     }
 
@@ -263,17 +521,14 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
         int winner = checkWin();
         if (winner == playerTurn) {
             JOptionPane.showMessageDialog(game, "You won!");
-            endTime = LocalTime.now();
             terminarPartida();
             return;
         } else if (winner != 0 && winner != playerTurn) {
             JOptionPane.showMessageDialog(game, "You lost!");
-            endTime = LocalTime.now();
             terminarPartida();
             return;
         } else if (turn == 9) {
             JOptionPane.showMessageDialog(game, "It's a tie!");
-            endTime = LocalTime.now();
             terminarPartida();
             return;
         }
@@ -289,7 +544,7 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
 
         // Exit the game 
         if (actionCommand.equals("Exit")) {
-            // TODO:
+            register.setFinalizacion(LocalDateTime.now());
             game.dispose();
             return;
         }
@@ -321,17 +576,18 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
         int winner = checkWin();
         if (winner == playerTurn) {
             JOptionPane.showMessageDialog(game, "You won!");
-            endTime = LocalTime.now();
+            playerScore = 25;
+            playerScore -= turn;
             terminarPartida();
             return;
         } else if (winner != 0 && winner != playerTurn) {
             JOptionPane.showMessageDialog(game, "You lost!");
-            endTime = LocalTime.now();
+            playerScore = 0;
             terminarPartida();
             return;
         } else if (turn == 9) {
             JOptionPane.showMessageDialog(game, "It's a tie!");
-            endTime = LocalTime.now();
+            playerScore = 7;
             terminarPartida();
             return;
         }

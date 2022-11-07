@@ -17,4 +17,11 @@ public interface iCentroJuego {
      * @return listado de juegos
      */
     public ArrayList<iJuego> getJuegosDisponibles();
+
+    /**
+     * Agrega un nuevo registro de juego al centro de juegos 
+     *
+     * @param registro registro de juego
+     */
+    public void addRegistro(iRegistro registro);
 }

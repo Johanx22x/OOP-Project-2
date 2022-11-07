@@ -1,6 +1,8 @@
 import frames.GameCenter;
 import frames.Login;
 
+import register.Register;
+
 import java.util.HashMap;
 
 /**
@@ -23,6 +25,6 @@ public class Main {
             }
         }
 
-        new GameCenter(login.getUser());
+        new GameCenter(login.getUser(), Register.readRecords());
     }
 }

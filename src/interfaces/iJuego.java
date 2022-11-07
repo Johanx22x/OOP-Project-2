@@ -3,10 +3,11 @@ package interfaces;
 public interface iJuego {
     /**
      * Inicializa un juego asociado a un jugador y centro o controlador de juegos.
+     *
      * @param jugador jugador quien inicaliza
      * @param centroJuegos
      */
-    public void iniciarPartida(iJugador jugador);
+    public void iniciarPartida(iJugador jugador, iCentroJuego centroJuegos);
 
     /**
      * Cierra la partida en juego sin registrar puntaje para el usuario pero si almacena 

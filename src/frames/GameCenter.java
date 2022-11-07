@@ -27,6 +27,7 @@ import interfaces.iCentroJuego;
  */
 public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
     private ArrayList<iJuego> games = new ArrayList<iJuego>();
+    private ArrayList<iRegistro> records = new ArrayList<iRegistro>();
     private iJugador player;
 
     /**
@@ -34,7 +35,7 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
      * 
      * @param username Username of the user
      */
-    public GameCenter(iJugador player) {
+    public GameCenter(iJugador player, ArrayList<iRegistro> records) {
         // Set frame properties
         super("Game Center");
         setSize(500, 500);
@@ -44,6 +45,9 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
 
         // Set the player
         this.player = player;
+
+        // Set the records 
+        this.records = records;
 
         // Add the games
         games.add(new TicTacToe());
@@ -104,8 +108,24 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
      * @return ArrayList<iRegistro> register of the game center
      */
     public ArrayList<iRegistro> getRegistros(iJuego tipoJuego) {
-        // TODO:
-        return null;
+        ArrayList<iRegistro> gameRecords = new ArrayList<iRegistro>();
+
+        for (iRegistro record : records) {
+            if (record.getTipoJuego().getNombre().equals(tipoJuego.getNombre())) {
+                gameRecords.add(record);
+            }
+        }
+
+        return gameRecords;
+    }
+
+    /**
+     * Method that add a new record to the game center 
+     *
+     * @param record New record to add
+     */
+    public void addRegistro(iRegistro record) {
+        records.add(record);
     }
 
     /**
@@ -125,14 +145,10 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
     public void actionPerformed(final ActionEvent e) {
         final String command = e.getActionCommand();
 
-        // If the command is a game name
-        for (int i = 0; i < games.size(); i++) {
-            if (command.equals(games.get(i).getNombre())) {
-                games.get(i).iniciarPartida(player);
-            }
-        }
-
-        if (command.equals("Exit")) {
+        if (command.equals("Tic Tac Toe")) {
+            TicTacToe game = new TicTacToe();
+            game.iniciarPartida(player, this);
+        } else if (command.equals("Exit")) {
             // Exit the application
             System.exit(0);
         } else if (command.equals("Score")) {

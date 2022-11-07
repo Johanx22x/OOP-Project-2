@@ -58,4 +58,11 @@ public interface iRegistro {
      * @return Jugador
      */
     public iJugador getJugador();
+
+    /**
+     * Obtiene la instancia del juego
+     *
+     * @return Juego
+     */
+    public iJuego getTipoJuego();
 }

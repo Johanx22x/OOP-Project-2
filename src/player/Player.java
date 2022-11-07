@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Player implements iJugador {
     private String username;
-    private ArrayList<iRegistro> records;
+    private ArrayList<iRegistro> records = new ArrayList<iRegistro>();
 
     /**
      * Constructor for objects of class Player
@@ -49,7 +49,14 @@ public class Player implements iJugador {
      * @return  Registro histórico de partidas.
      */
     public ArrayList<iRegistro> estadisticas(iJuego tipoJuego) {
-        // TODO:
-        return null;
+        ArrayList<iRegistro> stats = new ArrayList<iRegistro>();
+
+        for (iRegistro record : records) {
+            if (record.getTipoJuego().getNombre().equals(tipoJuego)) {
+                stats.add(record);
+            }
+        }
+
+        return stats;
     }
 }
