@@ -1,5 +1,5 @@
-author: Nombre Autor
-title: Titulo reporte
+author: "Johan Rodriguez, Karina Urbina, Maria Solis"
+title: "Segundo Proyecto: Centro de Juegos"
 lang: es
 
 documentclass: ./lib/apa7tec
@@ -10,8 +10,8 @@ classoption:
 
 header-includes: |
   \affiliation{Instituto Tecnologico de Costa Rica}
-  \course{Curso}
-  \professor{Profesor}
-  \duedate{Año}
+  \course{Programación Orientada a Objetos}
+  \professor{Jose Leonardo Viquez Acuña}
+  \duedate{2022}
   \venue{Sede San Carlos}
-  \mes{Mes}
+  \mes{II Semestre}
