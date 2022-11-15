@@ -1,3 +1,5 @@
+package juego2;
+
 import java.util.Random;
 
 /**
@@ -5,15 +7,14 @@ import java.util.Random;
  * @author Karina
  */
 public final class Memory {
-    
     private static Memory instance;
     private final String player1 = "Maria";
 
-    private Memory() { } 
+    private Memory() { }
     
     public static Memory getInstance() {
-        if (instance==null) {
-            instance= new Memory();
+        if (instance == null) {
+            instance = new Memory();
         }
         return instance;
     }
@@ -23,7 +24,6 @@ public final class Memory {
     }
     
     public int[] getCardNumbers() {
-        
         int[] numbers = new int[16];
         int count = 0;
 
@@ -37,6 +37,7 @@ public final class Memory {
                     nvr++;
                 }
             }
+
             if(nvr < 2) {
                 numbers[count] = na;
                 count++;

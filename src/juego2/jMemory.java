@@ -1,20 +1,28 @@
+package juego2;
+
+import interfaces.iJuego;
+import interfaces.iCentroJuego;
+import interfaces.iJugador;
 
 import java.text.SimpleDateFormat;
+
 import java.time.LocalTime;
+
 import java.util.Date;
 import java.util.Random;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
+
+import javax.swing.*;
 
 /**
+ * Class jMemory
+ * This class implements the game of memory and its methods
  *
  * @author Karina
  */
-public class jMemory extends javax.swing.JFrame {
-    
+public class jMemory extends JFrame implements iJuego {
+    private String gameName = "Memory Game";
+    private String gameDescription = "Memory Game Description"; // TODO: Add description
     private Memory mem = Memory.getInstance();
-
     private boolean cardUp = false;
     private ImageIcon card1;
     private ImageIcon card2;
@@ -24,17 +32,51 @@ public class jMemory extends javax.swing.JFrame {
     private LocalTime startTime;
     private LocalTime finishTime;
     private String date;
+    private iJugador player;
+    private iCentroJuego gameCenter;
+
     /**
-     * Creates new form PlayGame
+     * Inicializa un juego asociado a un jugador y centro o controlador de juegos.
+     *
+     * @param jugador jugador quien inicaliza
+     * @param centroJuegos
      */
-    public jMemory() {
+    public void iniciarPartida(iJugador jugador, iCentroJuego centroJuegos) {
+        this.player = jugador;
+        this.gameCenter = centroJuegos;
+
         initComponents();
         setCards();
+
         lbPlayer1.setText(mem.getPlayer1());
         lbDate.setText(getDate());
         startTime = LocalTime.now();
     }
 
+    /**
+     * Cierra la partida en juego sin registrar puntaje para el usuario pero si almacena 
+     * el registro de tiempo desde el inicio y hasta su finalización
+     * */
+    public void terminarPartida() {
+        finishTime = LocalTime.now();
+        this.dispose();
+    }
+
+    /**
+     * Obtiene el nombre del juego
+     * @return Nombre del juego
+     */
+    public String getNombre() {
+        return gameName;
+    }
+
+    /**
+     * Obtiene la descripción del juego
+     * @return Descripción del juego
+     */
+    public String getDescripcion() {
+        return gameDescription;
+    }
     
     public int[] getCardNumbers() {
         
@@ -59,14 +101,11 @@ public class jMemory extends javax.swing.JFrame {
         return numbers;
     }
     
-    
-
-/**
- * It sets the disabled icon of each button to the image of the card that corresponds to the number in
- * the array
- */
+    /**
+     * It sets the disabled icon of each button to the image of the card that corresponds to the number in
+     * the array
+     */
     private void setCards() { 
-        
         int[] numbers = getCardNumbers();
         btnC1.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[0]+".jpg")));
         btnC2.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[1]+".jpg")));
@@ -86,7 +125,6 @@ public class jMemory extends javax.swing.JFrame {
         btnC16.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[15]+".jpg")));
     }
     
-    
     private String getDate() {
         Date dateCurrent = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
@@ -94,15 +132,15 @@ public class jMemory extends javax.swing.JFrame {
         return dateFormat.format(dateCurrent);
     }
 
-/**
- * If the first card is not up, then set the button to disabled, set the first card to the button's
- * disabled icon, set the first button pressed to the button, set the card up to true, and set the
- * second card to false. If the first card is up, then set the button to disabled, set the second card
- * to the button's disabled icon, set the second button pressed to the button, set the second card to
- * true, and add 20 to the score
- * 
- * @param btn The button that was pressed
- */
+    /**
+     * If the first card is not up, then set the button to disabled, set the first card to the button's
+     * disabled icon, set the first button pressed to the button, set the card up to true, and set the
+     * second card to false. If the first card is up, then set the button to disabled, set the second card
+     * to the button's disabled icon, set the second button pressed to the button, set the second card to
+     * true, and add 20 to the score
+     * 
+     * @param btn The button that was pressed
+     */
     private void btnEnabled(JButton btn) {
 
         if(!cardUp) {
@@ -122,9 +160,9 @@ public class jMemory extends javax.swing.JFrame {
         }
     }
     
-/**
- * If the two cards are not the same, then the buttons are enabled and the score is reduced by 10
- */
+    /**
+     * If the two cards are not the same, then the buttons are enabled and the score is reduced by 10
+     */
     private void compare() {
         if(cardUp && secondCard) {
             if(card1.getDescription().compareTo(card2.getDescription()) != 0) {
@@ -137,10 +175,10 @@ public class jMemory extends javax.swing.JFrame {
         lbScoreP1.setText(""+score);
     }
     
-/**
- * This function resets the game by enabling all the buttons, setting the secondCard boolean to false,
- * setting the cardUp boolean to false, and setting the score to 0.
- */
+    /**
+     * This function resets the game by enabling all the buttons, setting the secondCard boolean to false,
+     * setting the cardUp boolean to false, and setting the score to 0.
+     */
     private void reset() {
         btnC1.setEnabled(true);
         btnC2.setEnabled(true);
@@ -164,13 +202,11 @@ public class jMemory extends javax.swing.JFrame {
         score = 0;
     }
     
-
-/**
- * This function checks if all the buttons are disabled, if they are, it shows a message dialog with
- * the player's name and score
- */
+    /**
+     * This function checks if all the buttons are disabled, if they are, it shows a message dialog with
+     * the player's name and score
+     */
     public void calcWin() {
-
         if(!btnC1.isEnabled() && !btnC2.isEnabled() && !btnC3.isEnabled() && !btnC4.isEnabled() && 
            !btnC5.isEnabled() && !btnC6.isEnabled() && !btnC7.isEnabled() && !btnC8.isEnabled() && 
            !btnC9.isEnabled() && !btnC10.isEnabled() && !btnC11.isEnabled() && !btnC12.isEnabled() && 
@@ -189,7 +225,6 @@ public class jMemory extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();

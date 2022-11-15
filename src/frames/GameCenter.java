@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import juego1.TicTacToe;
+// import juego1.MultiMath;
+import juego2.jMemory;
 
 import interfaces.iJuego;
 import interfaces.iRegistro;
@@ -34,6 +36,7 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
      * Game center constructor
      * 
      * @param username Username of the user
+     * @param ArrayList<iRegistro> records Records of the games
      */
     public GameCenter(iJugador player, ArrayList<iRegistro> records) {
         // Set frame properties
@@ -51,6 +54,7 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
 
         // Add the games
         games.add(new TicTacToe());
+        games.add(new jMemory());
 
         // Add an image to the background
         final ImageIcon img = new ImageIcon("img/background.jpg");
