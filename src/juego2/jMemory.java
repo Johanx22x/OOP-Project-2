@@ -47,6 +47,7 @@ public class jMemory extends JFrame {
     private JLabel lbDate;
     private JLabel lbPlayer1;
     private JLabel lbScoreP1;
+    private JButton btnExit;
     private boolean cardUp = false;
     private ImageIcon card1;
     private ImageIcon card2;
@@ -243,6 +244,8 @@ public class jMemory extends JFrame {
         lbPlayer1 = new javax.swing.JLabel();
         lbDate = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        btnExit = new javax.swing.JButton();
+
 
         jLabel7.setText("jLabel7");
 
@@ -639,6 +642,14 @@ public class jMemory extends JFrame {
         });
 
         jLabel3.setText("Fecha:");
+        
+        btnExit.setFont(new java.awt.Font("Malgun Gothic", 1, 14)); // NOI18N
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
