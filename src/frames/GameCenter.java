@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 
 import juego1.TicTacToe;
 import juego2.Memory;
+import juego3.HiddenNumberGameUI;
 
 import interfaces.iJuego;
 import interfaces.iRegistro;
@@ -54,6 +55,7 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
         // Add the games
         games.add(new TicTacToe());
         games.add(new Memory());
+        games.add(new HiddenNumberGameUI());
 
         // Add an image to the background
         final ImageIcon img = new ImageIcon("img/background.jpg");
@@ -145,6 +147,9 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
             game.iniciarPartida(player, this);
         } else if (command.equals("Memory Game")) {
             Memory game = new Memory();
+            game.iniciarPartida(player, this);
+        } else if (command.equals("Hidden Number")) {
+            HiddenNumberGameUI game = new HiddenNumberGameUI();
             game.iniciarPartida(player, this);
         } else if (command.equals("Exit")) {
             // Exit the application
