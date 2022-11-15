@@ -172,6 +172,15 @@ public class jMemory extends JFrame {
         cardUp = false;
         score = 0;
     }
+
+    /**
+     * This method returns the player score 
+     *
+     * @return {@link #score} The player score
+     */
+    public int getScore() {
+        return score;
+    }
     
     /**
      * This function checks if all the buttons are disabled, if they are, it shows a message dialog with
