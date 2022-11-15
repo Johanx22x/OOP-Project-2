@@ -45,8 +45,12 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
      */
     public void game() {
         register.setInicio(LocalDateTime.now());
-
-        game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        game.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                terminarPartida();
+            }
+        });
         game.setLayout(new FlowLayout());
         game.setResizable(false);
         game.setSize(500, 550);
