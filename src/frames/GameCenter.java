@@ -79,20 +79,12 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
         // For each game add a button 
         for (int i = 0; i < games.size(); i++) {
             final JButton btnGame = new JButton(games.get(i).getNombre());
-            btnGame.setBounds(175, 150 + (i * 50), 150, 50);
+            btnGame.setBounds(125, 150 + (i * 75), 250, 50);
             btnGame.setFont(new Font("Arial", Font.BOLD, 20));
             btnGame.setForeground(Color.BLACK);
             btnGame.addActionListener(this);
             background.add(btnGame);
         }
-
-        // Add the score button
-        JButton btnScore = new JButton("Score");
-        btnScore.setBounds(175, 325, 150, 50);
-        btnScore.setFont(new Font("Arial", Font.BOLD, 20));
-        btnScore.setForeground(Color.BLACK);
-        btnScore.addActionListener(this);
-        background.add(btnScore);
 
         // Add the exit button
         JButton btnExit = new JButton("Exit");
@@ -157,9 +149,6 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
         } else if (command.equals("Exit")) {
             // Exit the application
             System.exit(0);
-        } else if (command.equals("Score")) {
-            // Open the score frame
-            new Score();
         }
     }
 }

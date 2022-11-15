@@ -46,6 +46,7 @@ public class jMemory extends JFrame {
     private JLabel lbDate;
     private JLabel lbPlayer1;
     private JLabel lbScoreP1;
+    private JButton btnExit;
     private boolean cardUp = false;
     private ImageIcon card1;
     private ImageIcon card2;
@@ -55,6 +56,7 @@ public class jMemory extends JFrame {
     private iJugador player;
     private static iJuego gameParentMenu;
     private static jMemory instance = null;
+    private boolean isFinished = false;
 
     private jMemory(iJugador jugador) {
         initComponents();
@@ -167,9 +169,28 @@ public class jMemory extends JFrame {
         btnC14.setEnabled(true);
         btnC15.setEnabled(true);
         btnC16.setEnabled(true);
+        isFinished = false;
         secondCard = false;
         cardUp = false;
         score = 0;
+    }
+
+    /**
+     * This method returns the player score 
+     *
+     * @return {@link #score} The player score
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * This method returns the isFinished boolean
+     *
+     * @return {@link #isFinished} The isFinished boolean
+     */
+    public boolean getIsFinished() {
+        return isFinished;
     }
     
     /**
@@ -182,6 +203,7 @@ public class jMemory extends JFrame {
            !btnC9.isEnabled() && !btnC10.isEnabled() && !btnC11.isEnabled() && !btnC12.isEnabled() && 
            !btnC13.isEnabled() && !btnC14.isEnabled() && !btnC15.isEnabled() && !btnC16.isEnabled()) {
             JOptionPane.showMessageDialog(this,"¡Congratulations " + player.getNombre() + "!"+"\n Your score is :"+ score, "WIN", JOptionPane.INFORMATION_MESSAGE);  
+            isFinished = true;
             gameParentMenu.terminarPartida();
         }  
     }
@@ -217,9 +239,11 @@ public class jMemory extends JFrame {
         jLabel2 = new javax.swing.JLabel();
         lbScoreP1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
         lbPlayer1 = new javax.swing.JLabel();
         lbDate = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+
 
         jLabel7.setText("jLabel7");
 
@@ -607,8 +631,16 @@ public class jMemory extends JFrame {
             }
         });
 
-        jLabel3.setText("Fecha:");
+        btnExit.setFont(new java.awt.Font("Malgun Gothic", 1, 14)); // NOI18N
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
+        jLabel3.setText("Fecha:");
+        
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -632,6 +664,10 @@ public class jMemory extends JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -648,6 +684,9 @@ public class jMemory extends JFrame {
                 .addComponent(lbScoreP1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -810,6 +849,10 @@ public class jMemory extends JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         reset();
     }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        gameParentMenu.terminarPartida();
+    }//GEN-LAST:event_btnExitActionPerformed
 
     public int[] getCardNumbers() {
         int[] numbers = new int[16];

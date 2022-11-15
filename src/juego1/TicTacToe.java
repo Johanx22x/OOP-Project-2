@@ -123,7 +123,7 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
                 statsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 statsFrame.setLayout(new FlowLayout());
                 statsFrame.setResizable(false);
-                statsFrame.setSize(500, 600);
+                statsFrame.setSize(500, 650);
 
                 // Add a text area to show the stats 
                 JTextArea stats = new JTextArea();
