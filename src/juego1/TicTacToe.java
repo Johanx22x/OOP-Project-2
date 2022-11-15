@@ -118,7 +118,7 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
         final JButton statsButton = new JButton("Personal Stats");
         statsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                // Create a new frame to show the stats
                 JFrame statsFrame = new JFrame("Personal Stats");
                 statsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 statsFrame.setLayout(new FlowLayout());
@@ -130,6 +130,7 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
                 stats.setPreferredSize(new Dimension(450, 450));
                 stats.setEditable(false);
 
+                // Data variables
                 HashMap<LocalDate, Integer> playedDays = new HashMap<LocalDate, Integer>();
                 int totalGames = 0;
                 int totalHours = 0;
@@ -325,6 +326,11 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
         frame.add(exitButton);
     }
 
+    /**
+     * This method finishes the game and save the results
+     *
+     * @return {@link void}
+     */
     public void terminarPartida() {
         register.setFinalizacion(LocalDateTime.now());
         register.setScore(playerScore);
@@ -336,10 +342,20 @@ public class TicTacToe extends JFrame implements ActionListener, iJuego {
         game.dispose();
     }
 
+    /**
+     * This method returns the name of the game 
+     *
+     * @return {@link String} The name of the game
+     */
     public String getNombre() {
         return gameTitle;
     }
 
+    /**
+     * This method returns the description of the game 
+     *
+     * @return {@link String} The description of the game
+     */
     public String getDescripcion() {
         return gameDescription;
     }

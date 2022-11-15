@@ -21,6 +21,10 @@ import interfaces.iRegistro;
 import register.Register;
 
 /**
+ * Class Memory
+ * This class acts as a middleman between the game and the game center.
+ * Provides the game with the necessary information to run.
+ * It also provides the necessary information to the game center to save the game.
  *
  * @author Karina
  */
@@ -215,7 +219,7 @@ public final class Memory implements iJuego {
         startButton.addActionListener(new ActionListener() { 
             public void actionPerformed(final ActionEvent e) { 
                 register.setInicio(LocalDateTime.now());
-                instance = jMemory.getInstance(jugador, Memory.this);
+                instance = jMemory.getInstance(jugador, Memory.this); // NOTE: The game uses the singleton pattern
                 instance.reset();
                 frame.dispose();
                 instance.setVisible(true);

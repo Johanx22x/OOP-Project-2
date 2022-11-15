@@ -16,6 +16,7 @@ import javax.swing.*;
 /**
  * Class jMemory
  * This class implements the game of memory and its methods
+ * Using the singleton pattern
  *
  * @author Karina
  */
@@ -58,6 +59,11 @@ public class jMemory extends JFrame {
     private static jMemory instance = null;
     private boolean isFinished = false;
 
+    /**
+     * Constructor
+     *
+     * @param player
+     */
     private jMemory(iJugador jugador) {
         initComponents();
         setCards();
@@ -66,6 +72,14 @@ public class jMemory extends JFrame {
         this.player = jugador;
     }
 
+    /**
+     * Method getInstance
+     * This method returns the instance of the class
+     *
+     * @param {@link iJugador} player
+     * @param {@link iJuego} The type of game
+     * @return instance
+     */
     public static jMemory getInstance(iJugador jugador, iJuego juego) {
         if (instance == null) {
             instance = new jMemory(jugador);
@@ -74,6 +88,12 @@ public class jMemory extends JFrame {
         return instance;
     }
     
+    /**
+     * Method getDate
+     * This method returns the date
+     *
+     * @return date
+     */
     private String getDate() {
         Date dateCurrent = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");
@@ -82,7 +102,8 @@ public class jMemory extends JFrame {
     }
 
     /**
-     * It sets the disabled icon of each button to the image of the card that corresponds to the number in
+     * This method sets the disabled icon of each button to 
+     * the image of the card that corresponds to the number in
      * the array
      */
     private void setCards() { 
@@ -106,13 +127,19 @@ public class jMemory extends JFrame {
     }
 
     /**
-     * If the first card is not up, then set the button to disabled, set the first card to the button's
-     * disabled icon, set the first button pressed to the button, set the card up to true, and set the
-     * second card to false. If the first card is up, then set the button to disabled, set the second card
-     * to the button's disabled icon, set the second button pressed to the button, set the second card to
+     * btnEnabled method
+     * If the first card is not up, then set the button 
+     * to disabled, set the first card to the button's
+     * disabled icon, set the first button pressed to 
+     * the button, set the card up to true, and set the
+     * second card to false. If the first card is up, 
+     * then set the button to disabled, set the second card
+     * to the button's disabled icon, set the second 
+     * button pressed to the button, set the second card to
      * true, and add 20 to the score
      * 
      * @param btn The button that was pressed
+     * @return {@link void}
      */
     private void btnEnabled(JButton btn) {
         if(!cardUp) {
@@ -131,9 +158,40 @@ public class jMemory extends JFrame {
             calcWin(); 
         }
     }
+
+    /**
+     * getCardNumbers method 
+     * This method is used to get the card numbers 
+     *
+     * @return cardNumbers
+     */
+    public int[] getCardNumbers() {
+        int[] numbers = new int[16];
+        int count = 0;
+
+        while (count < 16) {
+            Random r = new Random();
+            int na = r.nextInt(8) + 1;
+            int nvr = 0;
+            
+            for(int i = 0; i < 16; i++ ) {
+                if(numbers[i] == na) {
+                    nvr++;
+                }
+            }
+            if(nvr < 2) {
+                numbers[count] = na;
+                count++;
+            }
+        }
+        return numbers;
+    }
     
     /**
+     * Method compare
      * If the two cards are not the same, then the buttons are enabled and the score is reduced by 10
+     *
+     * @return {@link void}
      */
     private void compare() {
         if(cardUp && secondCard) {
@@ -148,8 +206,11 @@ public class jMemory extends JFrame {
     }
     
     /**
-     * This function resets the game by enabling all the buttons, setting the secondCard boolean to false,
-     * setting the cardUp boolean to false, and setting the score to 0.
+     * This method resets the game by enabling all the buttons, 
+     * setting the secondCard boolean to false, setting the 
+     * cardUp boolean to false, and setting the score to 0.
+     *
+     * @return {@link void}
      */
     public void reset() {
         setCards();
@@ -194,7 +255,8 @@ public class jMemory extends JFrame {
     }
     
     /**
-     * This function checks if all the buttons are disabled, if they are, it shows a message dialog with
+     * This method checks if all the buttons are disabled, 
+     * if they are, it shows a message dialog with
      * the player's name and score
      */
     public void calcWin() {
@@ -210,11 +272,7 @@ public class jMemory extends JFrame {
 
     /**
      * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
      */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -716,163 +774,146 @@ public class jMemory extends JFrame {
         );
 
         setBounds(0, 0, 464, 457);
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void btnC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC1ActionPerformed
+    /**
+     * Below are the methods that are called when the user clicks on the buttons
+     * @param evt 
+     */
+
+    private void btnC1ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC1);
-    }//GEN-LAST:event_btnC1ActionPerformed
+    }
 
-    private void btnC2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC2ActionPerformed
+    private void btnC2ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC2);
-    }//GEN-LAST:event_btnC2ActionPerformed
+    }
 
-    private void btnC3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC3ActionPerformed
+    private void btnC3ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC3);
-    }//GEN-LAST:event_btnC3ActionPerformed
+    }
 
-    private void btnC4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC4ActionPerformed
+    private void btnC4ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC4);
-    }//GEN-LAST:event_btnC4ActionPerformed
+    }
 
-    private void btnC5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC5ActionPerformed
+    private void btnC5ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC5);
-    }//GEN-LAST:event_btnC5ActionPerformed
+    }
 
-    private void btnC6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC6ActionPerformed
+    private void btnC6ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC6);
-    }//GEN-LAST:event_btnC6ActionPerformed
+    }
 
-    private void btnC7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC7ActionPerformed
+    private void btnC7ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC7);
-    }//GEN-LAST:event_btnC7ActionPerformed
+    }
 
-    private void btnC8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC8ActionPerformed
+    private void btnC8ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC8);
-    }//GEN-LAST:event_btnC8ActionPerformed
+    }
 
-    private void btnC9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC9ActionPerformed
+    private void btnC9ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC9);
-    }//GEN-LAST:event_btnC9ActionPerformed
+    }
 
-    private void btnC10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC10ActionPerformed
+    private void btnC10ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC10);
-    }//GEN-LAST:event_btnC10ActionPerformed
+    }
 
-    private void btnC11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC11ActionPerformed
+    private void btnC11ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC11);
-    }//GEN-LAST:event_btnC11ActionPerformed
+    }
 
-    private void btnC12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC12ActionPerformed
+    private void btnC12ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC12);
-    }//GEN-LAST:event_btnC12ActionPerformed
+    }
 
-    private void btnC13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC13ActionPerformed
+    private void btnC13ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC13);
-    }//GEN-LAST:event_btnC13ActionPerformed
+    }
 
-    private void btnC14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC14ActionPerformed
+    private void btnC14ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC14);
-    }//GEN-LAST:event_btnC14ActionPerformed
+    }
 
-    private void btnC15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC15ActionPerformed
+    private void btnC15ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC15);
-    }//GEN-LAST:event_btnC15ActionPerformed
+    }
 
-    private void btnC16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnC16ActionPerformed
+    private void btnC16ActionPerformed(java.awt.event.ActionEvent evt) {
         btnEnabled(btnC16);
-    }//GEN-LAST:event_btnC16ActionPerformed
+    }
 
-    private void btnC1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC1MouseExited
+    private void btnC1MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC1MouseExited
+    }
 
-    private void btnC2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC2MouseExited
+    private void btnC2MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC2MouseExited
+    }
 
-    private void btnC3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC3MouseExited
+    private void btnC3MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC3MouseExited
+    }
 
-    private void btnC4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC4MouseExited
+    private void btnC4MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC4MouseExited
+    }
 
-    private void btnC5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC5MouseExited
+    private void btnC5MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC5MouseExited
+    }
 
-    private void btnC6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC6MouseExited
+    private void btnC6MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC6MouseExited
+    }
 
-    private void btnC7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC7MouseExited
+    private void btnC7MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC7MouseExited
+    }
 
-    private void btnC8MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC8MouseExited
+    private void btnC8MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC8MouseExited
+    }
 
-    private void btnC9MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC9MouseExited
+    private void btnC9MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC9MouseExited
+    }
 
-    private void btnC10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC10MouseExited
+    private void btnC10MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC10MouseExited
+    }
 
-    private void btnC11MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC11MouseExited
+    private void btnC11MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC11MouseExited
+    }
 
-    private void btnC12MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC12MouseExited
+    private void btnC12MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC12MouseExited
+    }
 
-    private void btnC13MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC13MouseExited
+    private void btnC13MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC13MouseExited
+    }
 
-    private void btnC14MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC14MouseExited
+    private void btnC14MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC14MouseExited
+    }
 
-    private void btnC15MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC15MouseExited
+    private void btnC15MouseExited(java.awt.event.MouseEvent evt) {
         compare();
-    }//GEN-LAST:event_btnC15MouseExited
+    }
 
-    private void btnC16MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnC16MouseExited
+    private void btnC16MouseExited(java.awt.event.MouseEvent evt) {
        compare();
-    }//GEN-LAST:event_btnC16MouseExited
+    }
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         reset();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
     
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {
         gameParentMenu.terminarPartida();
-    }//GEN-LAST:event_btnExitActionPerformed
-
-    public int[] getCardNumbers() {
-        int[] numbers = new int[16];
-        int count = 0;
-
-        while (count < 16) {
-            Random r = new Random();
-            int na = r.nextInt(8) + 1;
-            int nvr = 0;
-            
-            for(int i = 0; i < 16; i++ ) {
-                if(numbers[i] == na) {
-                    nvr++;
-                }
-            }
-            if(nvr < 2) {
-                numbers[count] = na;
-                count++;
-            }
-        }
-        return numbers;
     }
 }

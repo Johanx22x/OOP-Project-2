@@ -3,8 +3,6 @@ import frames.Login;
 
 import register.Register;
 
-import java.util.HashMap;
-
 /**
  * Main class of the program, here the program starts.
  *
