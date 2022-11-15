@@ -1,91 +1,76 @@
+package juego2;
+
+import interfaces.iCentroJuego;
+import interfaces.iJugador;
+import interfaces.iJuego;
 
 import java.text.SimpleDateFormat;
+
 import java.time.LocalTime;
+
 import java.util.Date;
 import java.util.Random;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
+
+import javax.swing.*;
 
 /**
+ * Class jMemory
+ * This class implements the game of memory and its methods
  *
  * @author Karina
  */
-public class jMemory extends javax.swing.JFrame {
-    
-    private Memory mem = Memory.getInstance();
-
+public class jMemory extends JFrame {
+    private JButton btnC1;
+    private JButton btnC10;
+    private JButton btnC11;
+    private JButton btnC12;
+    private JButton btnC13;
+    private JButton btnC14;
+    private JButton btnC15;
+    private JButton btnC16;
+    private JButton btnC2;
+    private JButton btnC3;
+    private JButton btnC4;
+    private JButton btnC5;
+    private JButton btnC6;
+    private JButton btnC7;
+    private JButton btnC8;
+    private JButton btnC9;
+    private JButton jButton1;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JLabel jLabel7;
+    private JPanel jPanel1;
+    private JPanel jPanel2;
+    private JLabel lbDate;
+    private JLabel lbPlayer1;
+    private JLabel lbScoreP1;
     private boolean cardUp = false;
     private ImageIcon card1;
     private ImageIcon card2;
     private JButton[] btnPressed = new JButton[2];
     private boolean secondCard = false;
     private int score = 0;  //"+20 pts if there are pairs or -10 pts if it fails"
-    private LocalTime startTime;
-    private LocalTime finishTime;
-    private String date;
-    /**
-     * Creates new form PlayGame
-     */
-    public jMemory() {
+    private iJugador player;
+    private static iJuego gameParentMenu;
+    private static jMemory instance = null;
+
+    private jMemory(iJugador jugador) {
         initComponents();
         setCards();
-        lbPlayer1.setText(mem.getPlayer1());
+        lbPlayer1.setText(jugador.getNombre());
         lbDate.setText(getDate());
-        startTime = LocalTime.now();
+        this.player = jugador;
     }
 
-    
-    public int[] getCardNumbers() {
-        
-        int[] numbers = new int[16];
-        int count = 0;
-
-        while (count < 16) {
-            Random r = new Random();
-            int na = r.nextInt(8) + 1;
-            int nvr = 0;
-            
-            for(int i = 0; i < 16; i++ ) {
-                if(numbers[i] == na) {
-                    nvr++;
-                }
-            }
-            if(nvr < 2) {
-                numbers[count] = na;
-                count++;
-            }
+    public static jMemory getInstance(iJugador jugador, iJuego juego) {
+        if (instance == null) {
+            instance = new jMemory(jugador);
         }
-        return numbers;
+        gameParentMenu = juego;
+        return instance;
     }
-    
-    
-
-/**
- * It sets the disabled icon of each button to the image of the card that corresponds to the number in
- * the array
- */
-    private void setCards() { 
-        
-        int[] numbers = getCardNumbers();
-        btnC1.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[0]+".jpg")));
-        btnC2.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[1]+".jpg")));
-        btnC3.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[2]+".jpg")));
-        btnC4.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[3]+".jpg")));
-        btnC5.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[4]+".jpg")));
-        btnC6.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[5]+".jpg")));
-        btnC7.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[6]+".jpg")));
-        btnC8.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[7]+".jpg")));
-        btnC9.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[8]+".jpg")));
-        btnC10.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[9]+".jpg")));
-        btnC11.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[10]+".jpg")));
-        btnC12.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[11]+".jpg")));
-        btnC13.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[12]+".jpg")));
-        btnC14.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[13]+".jpg")));
-        btnC15.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[14]+".jpg")));
-        btnC16.setDisabledIcon(new ImageIcon(getClass().getResource("../Images/"+numbers[15]+".jpg")));
-    }
-    
     
     private String getDate() {
         Date dateCurrent = new Date();
@@ -94,17 +79,40 @@ public class jMemory extends javax.swing.JFrame {
         return dateFormat.format(dateCurrent);
     }
 
-/**
- * If the first card is not up, then set the button to disabled, set the first card to the button's
- * disabled icon, set the first button pressed to the button, set the card up to true, and set the
- * second card to false. If the first card is up, then set the button to disabled, set the second card
- * to the button's disabled icon, set the second button pressed to the button, set the second card to
- * true, and add 20 to the score
- * 
- * @param btn The button that was pressed
- */
-    private void btnEnabled(JButton btn) {
+    /**
+     * It sets the disabled icon of each button to the image of the card that corresponds to the number in
+     * the array
+     */
+    private void setCards() { 
+        int[] numbers = getCardNumbers();
+        btnC1.setDisabledIcon(new ImageIcon("./img/"+numbers[0]+".jpg"));
+        btnC2.setDisabledIcon(new ImageIcon("./img/"+numbers[1]+".jpg"));
+        btnC3.setDisabledIcon(new ImageIcon("./img/"+numbers[2]+".jpg"));
+        btnC4.setDisabledIcon(new ImageIcon("./img/"+numbers[3]+".jpg"));
+        btnC5.setDisabledIcon(new ImageIcon("./img/"+numbers[4]+".jpg"));
+        btnC6.setDisabledIcon(new ImageIcon("./img/"+numbers[5]+".jpg"));
+        btnC7.setDisabledIcon(new ImageIcon("./img/"+numbers[6]+".jpg"));
+        btnC8.setDisabledIcon(new ImageIcon("./img/"+numbers[7]+".jpg"));
+        btnC9.setDisabledIcon(new ImageIcon("./img/"+numbers[8]+".jpg"));
+        btnC10.setDisabledIcon(new ImageIcon("./img/"+numbers[9]+".jpg"));
+        btnC11.setDisabledIcon(new ImageIcon("./img/"+numbers[10]+".jpg"));
+        btnC12.setDisabledIcon(new ImageIcon("./img/"+numbers[11]+".jpg"));
+        btnC13.setDisabledIcon(new ImageIcon("./img/"+numbers[12]+".jpg"));
+        btnC14.setDisabledIcon(new ImageIcon("./img/"+numbers[13]+".jpg"));
+        btnC15.setDisabledIcon(new ImageIcon("./img/"+numbers[14]+".jpg"));
+        btnC16.setDisabledIcon(new ImageIcon("./img/"+numbers[15]+".jpg"));
+    }
 
+    /**
+     * If the first card is not up, then set the button to disabled, set the first card to the button's
+     * disabled icon, set the first button pressed to the button, set the card up to true, and set the
+     * second card to false. If the first card is up, then set the button to disabled, set the second card
+     * to the button's disabled icon, set the second button pressed to the button, set the second card to
+     * true, and add 20 to the score
+     * 
+     * @param btn The button that was pressed
+     */
+    private void btnEnabled(JButton btn) {
         if(!cardUp) {
             btn.setEnabled(false);
             card1 = (ImageIcon) btn.getDisabledIcon();
@@ -122,9 +130,9 @@ public class jMemory extends javax.swing.JFrame {
         }
     }
     
-/**
- * If the two cards are not the same, then the buttons are enabled and the score is reduced by 10
- */
+    /**
+     * If the two cards are not the same, then the buttons are enabled and the score is reduced by 10
+     */
     private void compare() {
         if(cardUp && secondCard) {
             if(card1.getDescription().compareTo(card2.getDescription()) != 0) {
@@ -137,11 +145,12 @@ public class jMemory extends javax.swing.JFrame {
         lbScoreP1.setText(""+score);
     }
     
-/**
- * This function resets the game by enabling all the buttons, setting the secondCard boolean to false,
- * setting the cardUp boolean to false, and setting the score to 0.
- */
-    private void reset() {
+    /**
+     * This function resets the game by enabling all the buttons, setting the secondCard boolean to false,
+     * setting the cardUp boolean to false, and setting the score to 0.
+     */
+    public void reset() {
+        setCards();
         btnC1.setEnabled(true);
         btnC2.setEnabled(true);
         btnC3.setEnabled(true);
@@ -158,26 +167,22 @@ public class jMemory extends javax.swing.JFrame {
         btnC14.setEnabled(true);
         btnC15.setEnabled(true);
         btnC16.setEnabled(true);
-
         secondCard = false;
         cardUp = false;
         score = 0;
     }
     
-
-/**
- * This function checks if all the buttons are disabled, if they are, it shows a message dialog with
- * the player's name and score
- */
+    /**
+     * This function checks if all the buttons are disabled, if they are, it shows a message dialog with
+     * the player's name and score
+     */
     public void calcWin() {
-
         if(!btnC1.isEnabled() && !btnC2.isEnabled() && !btnC3.isEnabled() && !btnC4.isEnabled() && 
            !btnC5.isEnabled() && !btnC6.isEnabled() && !btnC7.isEnabled() && !btnC8.isEnabled() && 
            !btnC9.isEnabled() && !btnC10.isEnabled() && !btnC11.isEnabled() && !btnC12.isEnabled() && 
            !btnC13.isEnabled() && !btnC14.isEnabled() && !btnC15.isEnabled() && !btnC16.isEnabled()) {
-            finishTime = LocalTime.now();
-            JOptionPane.showMessageDialog(this,"¡Congratulations "+mem.getPlayer1()+"!"+"\n Your score is :"+ score, "WIN", JOptionPane.INFORMATION_MESSAGE);  
-            reset();
+            JOptionPane.showMessageDialog(this,"¡Congratulations " + player.getNombre() + "!"+"\n Your score is :"+ score, "WIN", JOptionPane.INFORMATION_MESSAGE);  
+            gameParentMenu.terminarPartida();
         }  
     }
 
@@ -189,7 +194,6 @@ public class jMemory extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -222,6 +226,7 @@ public class jMemory extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Memory Game");
         setAutoRequestFocus(false);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Malgun Gothic", 1, 24)); // NOI18N
         jLabel1.setText("Memory Game");
@@ -229,29 +234,30 @@ public class jMemory extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        btnC1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC1.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC1.setBorder(null);
         btnC1.setBorderPainted(false);
         btnC1.setContentAreaFilled(false);
         btnC1.setFocusable(false);
-        btnC1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC1.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC1MouseExited(evt);
             }
         });
+
         btnC1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnC1ActionPerformed(evt);
             }
         });
 
-        btnC2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC2.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC2.setBorder(null);
         btnC2.setBorderPainted(false);
         btnC2.setContentAreaFilled(false);
         btnC2.setFocusable(false);
-        btnC2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC2.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC2MouseExited(evt);
@@ -263,12 +269,12 @@ public class jMemory extends javax.swing.JFrame {
             }
         });
 
-        btnC3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC3.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC3.setBorder(null);
         btnC3.setBorderPainted(false);
         btnC3.setContentAreaFilled(false);
         btnC3.setFocusable(false);
-        btnC3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC3.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC3MouseExited(evt);
@@ -280,12 +286,12 @@ public class jMemory extends javax.swing.JFrame {
             }
         });
 
-        btnC4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC4.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC4.setBorder(null);
         btnC4.setBorderPainted(false);
         btnC4.setContentAreaFilled(false);
         btnC4.setFocusable(false);
-        btnC4.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC4.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC4MouseExited(evt);
@@ -297,12 +303,12 @@ public class jMemory extends javax.swing.JFrame {
             }
         });
 
-        btnC5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC5.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC5.setBorder(null);
         btnC5.setBorderPainted(false);
         btnC5.setContentAreaFilled(false);
         btnC5.setFocusable(false);
-        btnC5.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC5.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC5MouseExited(evt);
@@ -314,12 +320,12 @@ public class jMemory extends javax.swing.JFrame {
             }
         });
 
-        btnC6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC6.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC6.setBorder(null);
         btnC6.setBorderPainted(false);
         btnC6.setContentAreaFilled(false);
         btnC6.setFocusable(false);
-        btnC6.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC6.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC6MouseExited(evt);
@@ -331,12 +337,12 @@ public class jMemory extends javax.swing.JFrame {
             }
         });
 
-        btnC7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC7.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC7.setBorder(null);
         btnC7.setBorderPainted(false);
         btnC7.setContentAreaFilled(false);
         btnC7.setFocusable(false);
-        btnC7.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC7.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC7MouseExited(evt);
@@ -348,12 +354,12 @@ public class jMemory extends javax.swing.JFrame {
             }
         });
 
-        btnC8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC8.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC8.setBorder(null);
         btnC8.setBorderPainted(false);
         btnC8.setContentAreaFilled(false);
         btnC8.setFocusable(false);
-        btnC8.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC8.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC8MouseExited(evt);
@@ -365,12 +371,12 @@ public class jMemory extends javax.swing.JFrame {
             }
         });
 
-        btnC9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC9.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC9.setBorder(null);
         btnC9.setBorderPainted(false);
         btnC9.setContentAreaFilled(false);
         btnC9.setFocusable(false);
-        btnC9.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC9.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC9MouseExited(evt);
@@ -382,12 +388,12 @@ public class jMemory extends javax.swing.JFrame {
             }
         });
 
-        btnC12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC12.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC12.setBorder(null);
         btnC12.setBorderPainted(false);
         btnC12.setContentAreaFilled(false);
         btnC12.setFocusable(false);
-        btnC12.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC12.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC12MouseExited(evt);
@@ -399,12 +405,12 @@ public class jMemory extends javax.swing.JFrame {
             }
         });
 
-        btnC10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC10.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC10.setBorder(null);
         btnC10.setBorderPainted(false);
         btnC10.setContentAreaFilled(false);
         btnC10.setFocusable(false);
-        btnC10.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC10.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC10MouseExited(evt);
@@ -416,12 +422,12 @@ public class jMemory extends javax.swing.JFrame {
             }
         });
 
-        btnC11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC11.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC11.setBorder(null);
         btnC11.setBorderPainted(false);
         btnC11.setContentAreaFilled(false);
         btnC11.setFocusable(false);
-        btnC11.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC11.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC11MouseExited(evt);
@@ -433,12 +439,12 @@ public class jMemory extends javax.swing.JFrame {
             }
         });
 
-        btnC14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC14.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC14.setBorder(null);
         btnC14.setBorderPainted(false);
         btnC14.setContentAreaFilled(false);
         btnC14.setFocusable(false);
-        btnC14.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC14.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC14MouseExited(evt);
@@ -450,12 +456,12 @@ public class jMemory extends javax.swing.JFrame {
             }
         });
 
-        btnC15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC15.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC15.setBorder(null);
         btnC15.setBorderPainted(false);
         btnC15.setContentAreaFilled(false);
         btnC15.setFocusable(false);
-        btnC15.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC15.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC15MouseExited(evt);
@@ -467,12 +473,12 @@ public class jMemory extends javax.swing.JFrame {
             }
         });
 
-        btnC13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC13.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC13.setBorder(null);
         btnC13.setBorderPainted(false);
         btnC13.setContentAreaFilled(false);
         btnC13.setFocusable(false);
-        btnC13.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC13.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC13MouseExited(evt);
@@ -484,12 +490,12 @@ public class jMemory extends javax.swing.JFrame {
             }
         });
 
-        btnC16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c0.png"))); // NOI18N
+        btnC16.setIcon(new javax.swing.ImageIcon("./img/c0.png")); // NOI18N
         btnC16.setBorder(null);
         btnC16.setBorderPainted(false);
         btnC16.setContentAreaFilled(false);
         btnC16.setFocusable(false);
-        btnC16.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cr.png"))); // NOI18N
+        btnC16.setRolloverIcon(new javax.swing.ImageIcon("./img/cr.png")); // NOI18N
         btnC16.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnC16MouseExited(evt);
@@ -585,7 +591,7 @@ public class jMemory extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         jLabel2.setFont(new java.awt.Font("Malgun Gothic", 1, 12)); // NOI18N
-        jLabel2.setText("Player 1:");
+        jLabel2.setText("Player:");
 
         lbScoreP1.setFont(new java.awt.Font("Dubai", 1, 14)); // NOI18N
         lbScoreP1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -805,86 +811,25 @@ public class jMemory extends javax.swing.JFrame {
         reset();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    public int[] getCardNumbers() {
+        int[] numbers = new int[16];
+        int count = 0;
+
+        while (count < 16) {
+            Random r = new Random();
+            int na = r.nextInt(8) + 1;
+            int nvr = 0;
+            
+            for(int i = 0; i < 16; i++ ) {
+                if(numbers[i] == na) {
+                    nvr++;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Memory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Memory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Memory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Memory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new jMemory().setVisible(true);
-                
-                
+            if(nvr < 2) {
+                numbers[count] = na;
+                count++;
             }
-        });
+        }
+        return numbers;
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnC1;
-    private javax.swing.JButton btnC10;
-    private javax.swing.JButton btnC11;
-    private javax.swing.JButton btnC12;
-    private javax.swing.JButton btnC13;
-    private javax.swing.JButton btnC14;
-    private javax.swing.JButton btnC15;
-    private javax.swing.JButton btnC16;
-    private javax.swing.JButton btnC2;
-    private javax.swing.JButton btnC3;
-    private javax.swing.JButton btnC4;
-    private javax.swing.JButton btnC5;
-    private javax.swing.JButton btnC6;
-    private javax.swing.JButton btnC7;
-    private javax.swing.JButton btnC8;
-    private javax.swing.JButton btnC9;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lbDate;
-    private javax.swing.JLabel lbPlayer1;
-    private javax.swing.JLabel lbScoreP1;
-    // End of variables declaration//GEN-END:variables
 }
