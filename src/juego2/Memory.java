@@ -242,11 +242,18 @@ public final class Memory implements iJuego {
         register.setFinalizacion(LocalDateTime.now());
 
         instance.dispose();
-        int score = instance.getScore();
 
-        register.setFinished(true);
-        register.setScore(score);
-        player.registrarPuntaje(score, this);
+        if (instance.getIsFinished()) {
+            int score = instance.getScore();
+            register.setFinished(true);
+            register.setScore(score);
+            player.registrarPuntaje(score, this);
+        } else {
+            register.setFinished(false);
+            register.setScore(0);
+            player.registrarPuntaje(0, this);
+        }
+
         center.addRegistro(register);
     }
     
