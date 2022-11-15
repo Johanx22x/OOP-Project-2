@@ -85,6 +85,8 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
             btnGame.setFont(new Font("Arial", Font.BOLD, 20));
             btnGame.setForeground(Color.BLACK);
             btnGame.addActionListener(this);
+            btnGame.addMouseListener(null);
+            btnGame.setToolTipText("<html>"+games.get(i).getNombre()+"<html> <br>"+games.get(i).getDescripcion());
             background.add(btnGame);
         }
 

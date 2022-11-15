@@ -29,7 +29,7 @@ import register.Register;
 public class TicTacToe extends JFrame implements ActionListener, iJuego {
     private final JFrame game = new JFrame("Tic Tac Toe");
     private final String gameTitle = "Tic Tac Toe";
-    private final String gameDescription = "In this game you will play against the computer, you will have to put 3 X's or O's in a row to win.";
+    private final String gameDescription = "<html>In this game you will play against the computer,<br> you will have to put 3 X's or O's in a row to win.<html>";
     private final JButton exitButton = new JButton("Exit");
     private final JButton[][] buttons = new JButton[3][3];
     private final int[][] board = new int[3][3];

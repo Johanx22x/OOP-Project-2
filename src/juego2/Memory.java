@@ -30,7 +30,9 @@ import register.Register;
  */
 public final class Memory implements iJuego {
     private String gameTitle = "Memory Game";
-    private String gameDescription = "Memory Game Description"; // TODO: Add description
+    private String gameDescription = "<html>The objective of this game is to memorize the location of identical cards to form a pair<br> <html>"+
+                                     "<html>and add 20 pts.If you turn over different cards, 10 points are added. The game ends when <br> <html>"+
+                                     "<html>all pairs are found and the player with a score equal to 160 or the closest to this record wins.<html>"; // TODO: Add description
     private final JButton exitButton = new JButton("Exit");
     private jMemory instance;
     private iJugador player;
