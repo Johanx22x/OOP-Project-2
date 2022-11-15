@@ -13,8 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import juego1.TicTacToe;
-// import juego1.MultiMath;
-import juego2.jMemory;
+import juego2.Memory;
 
 import interfaces.iJuego;
 import interfaces.iRegistro;
@@ -54,7 +53,7 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
 
         // Add the games
         games.add(new TicTacToe());
-        games.add(new jMemory());
+        games.add(new Memory());
 
         // Add an image to the background
         final ImageIcon img = new ImageIcon("img/background.jpg");
@@ -151,6 +150,9 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
 
         if (command.equals("Tic Tac Toe")) {
             TicTacToe game = new TicTacToe();
+            game.iniciarPartida(player, this);
+        } else if (command.equals("Memory Game")) {
+            Memory game = new Memory();
             game.iniciarPartida(player, this);
         } else if (command.equals("Exit")) {
             // Exit the application

@@ -1,48 +1,61 @@
 package juego2;
 
-import java.util.Random;
+import java.time.LocalTime;
+
+import interfaces.iJuego;
+import interfaces.iCentroJuego;
+import interfaces.iJugador;
 
 /**
  *
  * @author Karina
  */
-public final class Memory {
-    private static Memory instance;
-    private final String player1 = "Maria";
+public final class Memory implements iJuego {
+    private String gameName = "Memory Game";
+    private String gameDescription = "Memory Game Description"; // TODO: Add description
+    private jMemory instance;
+    private iJugador player;
+    private iCentroJuego gameCenter;
+    private LocalTime startTime;
+    private LocalTime finishTime;
 
-    private Memory() { }
-    
-    public static Memory getInstance() {
-        if (instance == null) {
-            instance = new Memory();
-        }
-        return instance;
+    /**
+     * Inicializa un juego asociado a un jugador y centro o controlador de juegos.
+     *
+     * @param jugador jugador quien inicalizar
+     * @param centroJuegos
+     */
+    public void iniciarPartida(iJugador jugador, iCentroJuego centroJuegos) {
+        startTime = LocalTime.now();
+        this.player = jugador;
+        this.gameCenter = centroJuegos;
+        instance = jMemory.getInstance(jugador, this);
+        instance.reset();
+        instance.setVisible(true);
+    }
+
+    /**
+     * Cierra la partida en juego sin registrar puntaje para el usuario pero si almacena 
+     * el registro de tiempo desde el inicio y hasta su finalización
+     */
+    public void terminarPartida() {
+        finishTime = LocalTime.now();
+        instance.dispose();
     }
     
-    public String getPlayer1() {
-        return player1;
+    /**
+     * Obtiene el nombre del juego
+     * @return Nombre del juego
+     */
+    public String getNombre() {
+        return gameName;
     }
-    
-    public int[] getCardNumbers() {
-        int[] numbers = new int[16];
-        int count = 0;
 
-        while (count < 16) {
-            Random r = new Random();
-            int na = r.nextInt(8) + 1;
-            int nvr = 0;
-            
-            for(int i = 0; i < 16; i++ ) {
-                if(numbers[i] == na) {
-                    nvr++;
-                }
-            }
-
-            if(nvr < 2) {
-                numbers[count] = na;
-                count++;
-            }
-        }
-        return numbers;
-    } 
+    /**
+     * Obtiene la descripción del juego
+     * @return Descripción del juego
+     */
+    public String getDescripcion() {
+        return gameDescription;
+    }
 }
