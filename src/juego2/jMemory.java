@@ -37,7 +37,6 @@ public class jMemory extends JFrame {
     private JButton btnC8;
     private JButton btnC9;
     private JButton jButton1;
-    private JButton btnExit;
     private JLabel jLabel1;
     private JLabel jLabel2;
     private JLabel jLabel3;
@@ -244,7 +243,6 @@ public class jMemory extends JFrame {
         lbPlayer1 = new javax.swing.JLabel();
         lbDate = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btnExit = new javax.swing.JButton();
 
 
         jLabel7.setText("jLabel7");
@@ -643,14 +641,6 @@ public class jMemory extends JFrame {
 
         jLabel3.setText("Fecha:");
         
-        btnExit.setFont(new java.awt.Font("Malgun Gothic", 1, 14)); // NOI18N
-        btnExit.setText("Exit");
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -862,7 +852,6 @@ public class jMemory extends JFrame {
     
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         gameParentMenu.terminarPartida();
-        isFinished = true;
     }//GEN-LAST:event_btnExitActionPerformed
 
     public int[] getCardNumbers() {
