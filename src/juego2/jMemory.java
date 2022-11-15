@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.Random;
 
 import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
 
 /**
  * Class jMemory
@@ -305,7 +307,13 @@ public class jMemory extends JFrame {
 
         jLabel7.setText("jLabel7");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                gameParentMenu.terminarPartida();
+            }
+        });
+
         setTitle("Memory Game");
         setAutoRequestFocus(false);
         setResizable(false);
