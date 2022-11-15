@@ -1,11 +1,12 @@
 CLASS=./lib
 SRC=./src
+JAVA=java
 
 all:
 	$(MAKE) -C $(SRC)
 
 run: all
-	java -cp $(CLASS) Main
+	$(JAVA) -cp $(CLASS) Main
 
 clean:
 	rm -rf $(CLASS)/*
