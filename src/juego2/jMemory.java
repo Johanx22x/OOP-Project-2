@@ -46,6 +46,7 @@ public class jMemory extends JFrame {
     private JLabel lbDate;
     private JLabel lbPlayer1;
     private JLabel lbScoreP1;
+    private JButton btnExit;
     private boolean cardUp = false;
     private ImageIcon card1;
     private ImageIcon card2;
@@ -220,6 +221,8 @@ public class jMemory extends JFrame {
         lbPlayer1 = new javax.swing.JLabel();
         lbDate = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        btnExit = new javax.swing.JButton();
+
 
         jLabel7.setText("jLabel7");
 
@@ -608,6 +611,14 @@ public class jMemory extends JFrame {
         });
 
         jLabel3.setText("Fecha:");
+        
+        btnExit.setFont(new java.awt.Font("Malgun Gothic", 1, 14)); // NOI18N
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -630,8 +641,10 @@ public class jMemory extends JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -648,6 +661,9 @@ public class jMemory extends JFrame {
                 .addComponent(lbScoreP1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnExit)
+                .addGap(10, 10, 10)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -810,6 +826,9 @@ public class jMemory extends JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         reset();
     }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        dispose();
+    }    
 
     public int[] getCardNumbers() {
         int[] numbers = new int[16];
