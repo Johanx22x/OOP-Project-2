@@ -50,7 +50,9 @@ Si el usuario escoge la letra “O” el primer turno será el del jugador 2, po
 
 - Memory Game: En esta ventana encuentran los botones de  “General Stats”, “Personal Stats”, “Start” y “Exit”. 
 
--- Para mostrar las estadísticas personales, se creó un evento que cuando el usuario presione el botón “General Stats” se genere la ventana con los datos de las primeras 10 partidas ordenadas que tengan el mayor puntaje del registro de todos los usuarios. Esto ocurre de la misma manera que el recorrido que se utiliza en el primer juego solo que este caso la lista de registros está referenciada al juego de Memoria. Tal y como se observa en la Figura 1. 
+-- Tal como se muestra en [@fig:figura1] mostrar las estadísticas personales, se creó un evento que cuando el usuario presione el botón “General Stats” se genere la ventana con los datos de las primeras 10 partidas ordenadas que tengan el mayor puntaje del registro de todos los usuarios. Esto ocurre de la misma manera que el recorrido que se utiliza en el primer juego solo que este caso la lista de registros está referenciada al juego de Memoria. Tal y como se observa en la Figura 1. 
+
+![Eventos del botón General Stats en el juego Memory Game](images/fig1.png){#fig:figura1}
 
 -- En el caso de las estadísticas personales, si el usuario presiona “Personal Stats” se llamará al evento que crea la ventana donde se muestra el historial de partidas que ha realizado el usuario dentro del juego. Para obtener estos datos se recorre el registro del centro de juegos, se compara el usuario actual con los demás usuarios y se almacena la hora de inicio y finalización con los puntos obtenidos de cada partida, si fue finalizada con éxito. Además, se guarda el promedio de tiempo diario en el juego, que se obtiene dividiendo la cantidad de días por la cantidad de horas y también se guarda la cantidad de partidas realizadas. Exactamente igual al botón con la misma función del primer juego pero su recorrido se basa en los registros del juego Memoria. 
 
@@ -71,9 +73,9 @@ A continuación, se detalla un poco más el proceso de desarrollo:
 
 #### Paso 1
 
-En el primer paso para el desarrollo de este juego se inició por personalizar la interfaz gráfica de la base del juego, cambiando la dimensión y las imágenes de las cartas y agregando otros elementos a la ventana de la partida.  
-
-![[Markdown image](https://weibeld.net/assets/icons/markdown.png)](images/markdown.png){#fig:markdown_image}
+En el primer paso para el desarrollo de este juego se inició por personalizar la interfaz 
+gráfica de la base del juego, cambiando la dimensión y las imágenes de las cartas y agregando 
+otros elementos a la ventana de la partida.  
 
 #### Paso 2 
 
