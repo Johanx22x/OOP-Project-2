@@ -1,4 +1,5 @@
 # Analisis de resultados
+
 Tarea/Requirimiento | Estado | Observaciones
 :-:|:-:|:-:
 Registro y verificación de los jugadores | Completado | En el código implementado, los usuarios pueden registrar correctamente todos los datos descritos para el almacenamiento del registro y correcta verificación del login del mismo, tal y como se planteó en la solución del problema.

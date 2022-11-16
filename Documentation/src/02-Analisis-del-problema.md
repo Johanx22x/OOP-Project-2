@@ -2,15 +2,15 @@
 
 Según el problema planteado, se requieren resolver los siguientes puntos: 
 
-##1)Registro y verificación de los jugadores 
+## Registro y verificación de los jugadores 
 
 Los usuarios, podrán registrarse en el sistema proporcionando su nombre de usuario y su contraseña, estos datos serán almacenados en una estructura tipo ArrayList, a la cual se podrá acceder durante el inicio de sesión cuando el usuario desee entrar a la central de juegos para así validar el usuario y la contraseña. 
 
-##2)Menú Central de Juegos 
+## Menú Central de Juegos 
 
 Muestra en pantalla las diferentes opciones de juegos disponibles, así los jugadores pueden seleccionar su juego de preferencia pulsando sobre el botón respectivo.  
 
-##3) Menú Individual del Juego 
+## Menú Individual del Juego 
 
 En pantalla se muestra al usuario, los datos necesarios para inicializar el juego escogido, por ejemplo, el signo con el que se desea participar en una partida, etc. También mediante botones, se le brinda al usuario las opciones de ver sus estadísticas personales y las estadísticas generales. 
 
@@ -20,7 +20,7 @@ Por su parte las estadísticas generales, le muestran al jugador cuales son las 
 
 Se muestran también los botones respectivos para iniciar la partida o cerrar la ventana, haciendo que el usuario regrese al menú central de juegos. 
 
-##4) Desarrollo de los juegos del equipo 
+## Desarrollo de los juegos del equipo 
 
 Se analiza en primera instancia desarrollar los siguientes juegos: 
 
@@ -30,10 +30,10 @@ Se analiza en primera instancia desarrollar los siguientes juegos:
 
 Ambos juegos permiten al usuario finalizar la partida pulsando el botón de salida, almacenando en el registro la información de la partida y señalando que el estado de esta fue inconcluso, también el juego de memoria permite al usuario seleccionar la opción de reiniciar la partida.
 
-##5)Implementación del tercer juego  
+## Implementación del tercer juego  
 
 Se requiere implementar en el sistema el juego HiddenNumberGame, creado por Aaron Gonzáles, David Arguedas y Leiner Alvarado, esto mediante la incorporación del archivo .class de su juego. 
 
-##6)Manejo de archivos y excepciones 
+## Manejo de archivos y excepciones 
 
 Se requiere implementar excepciones para evitar la caída de la aplicación en las secciones vulnerables, además se deben guardar en archivos los registros de usuario y puntajes, los cuales, volverán a cargarse cada vez que se ejecute el programa. 

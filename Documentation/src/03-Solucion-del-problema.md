@@ -1,15 +1,14 @@
 # Solución del problema
-Solución del problema 
 
 Antes de comenzar a dar solución a los puntos planteados en el análisis del problema, se inició por implementar las interfaces iRegistro, iJugador, iJuego e iCentroJuego, estas fueron facilitadas por el profesor Leonardo Villalobos. Con estas interfaces se pudo acceder a diferentes funciones como extraer el nombre del jugador, registrar la puntuación, devolver el registro histórico de partidas , asignar la fecha y hora de inicio y finalización de las partidas, etc. Seguidamente se implementaron y resolvieron las siguientes etapas:  
 
-##Etapa 1: 
+## Etapa 1: 
 
 En la primera etapa se le dará solución a la creación de la estructura para los registros de personas, para esto se crea la clase “Register.java”, la cual cuando el usuario lo solicite, le muestra una nueva ventana, en la cual se le pide al usuario ingresar dos datos, su nombre de usuario y su contraseña, estos son ingresados dentro de los “JTextField” los cuales mediante el método “getText” capturan los datos ingresados por teclado por el jugador, además de esto le pide al usuario que confirme su contraseña, y al capturar esta, mediante condicionales comprueba que esta confirmación sea igual a la primera contraseña ingresada, si estas no concuerdan, muestra un mensaje de error en la pantalla, de lo contrario, almacena dentro de otra clase llamada Login, en una estructura HashMap, el nuevo registro y le confirma al usuario que este se a concretado de manera correcta. 
 
 Para la validación de usuarios, dentro de la clase Login, en el método “actionPerformed”, se captura el usuario y la contraseña proporcionadas en la ventana de inicio para ingresar a la central de juegos. El método comprueba mediante condicionales “if” que el usuario y la contraseña ingresadas en los  “JTextField” sea diferentes al nombre de usuario y contraseña de los registros almacenados en el  “HashMap” de “users”, si la condicional se cumple, muestra un mensaje en pantalla indicando que las credenciales del usuario son incorrectas. De manera contraria devuelve un “true” en la variable booleana “loginSuccess”, el método getter de esta variable es llamado en la clase “Main.java” como confirmación de validación de credenciales e inicialización del juego. 
 
-##Etapa 2: 
+## Etapa 2: 
 
 La creación del Menú Central de Juegos será el problema solucionado en la etapa dos. Dentro de la clase “GameCenter.java”, se define una nueva ventana, la cual implementa las interfaces iCentroJuego, y ActionListener. Esta clase contiene además tres atributos definidos, el primero es un ArrayList de la interfaz iJugador y contiene los juegos disponibles. El siguiente es otro ArrayList de la interfaz iRegistro y contiene los records de partidas registradas, finalmente, el atributo player referenciado de la interfaz iJugador. 
 
@@ -19,11 +18,11 @@ Gracias a los métodos “getToolTipText()” y “setToolTipText()” le permit
 
 Mediante el método “actionPerformed”, y el getter “getActionCommand” comprueba la selección del botón que haya presionado el usuario, y basándose en esta, muestra en pantalla el menú de inicio del juego seleccionado. 
 
-##Etapa 3: 
+## Etapa 3: 
 
 En cuanto a los menús individuales para cada juego: 
 
-- Tic Tac Toe: Dentro del método “iniciarPartida” de la clase “TicTacToe.java”, se define una nueva ventana, la cual lleva por título el nombre del juego, además muestra los botones de: 
+- Tic Tac Toe: Dentro del método “iniciarPartida” de la clase `TicTacToe.java`, se define una nueva ventana, la cual lleva por título el nombre del juego, además muestra los botones de: 
 
 -- PersonalStatus: contiene un HashMap definido como “playedDays” el cual recibe datos tipo LocalDate e Integer. Con un ciclo “for”, recorre los registros de juegos en el centro de juegos y mediante el método “getRegistros”, obtiene los, registros de las partidas Tic Tac Toe, luego, de igual manera con base al registro busca los registros cuyo nombre de jugador sea igual al del usuario que está solicitando el listado, esto mediante los métodos getJugador y getNombre de la interfaz register y el método getNombre de la interfaz jugador, e imprime los datos de inicio y finalización de la partida, con los métodos de la interfaz register llamados “getInicio()” y “getFinalizacion()”, también muestre el puntaje de la partida, la duración de esta y el estado de la misma, por medio de “getPuntaje()”,”getSegundosTotalesPartida()” y “getSegundosTotalesPartida()”. 
 
@@ -58,35 +57,37 @@ Si el usuario escoge la letra “O” el primer turno será el del jugador 2, po
 -- Los botones de “Start” y “Exit” cumplen las mismas funciones de inicio de partida y cierre de ventana actual que en el primer juego. 
 
 
-##Etapa 4: Desarrollo de los juegos del equipo 
+## Etapa 4: Desarrollo de los juegos del equipo 
 
-###Primer juego: 
+### Primer juego: 
 
-###Segundo juego: 
+### Segundo juego: 
 
-Para la elaboración del segundo juego se tomó como referencia parte del código creado por [@Darwin Galindo] y [@Cinthya Chinchilla] donde cada uno desarrollan un juego de memoria similar. Tomando como base estos ejemplos, se procedió a fusionar partes de ambos códigos para obtener un  “Memory Game” adaptado a los requerimientos del proyecto. 
+Para la elaboración del segundo juego se tomó como referencia parte del código creado por [@darwin] y [@cinthya] donde cada uno desarrollan un juego de memoria similar. Tomando como base estos ejemplos, se procedió a fusionar partes de ambos códigos para obtener un  “Memory Game” adaptado a los requerimientos del proyecto. 
 
 Se crearon dos archivos llamados “jMemory” y “Memory”, donde el primero cuenta con la estructura y el funcionamiento del juego que se le va a mostrar al usuario y el segundo, incorpora la estructura del menú principal del juego y lo conecta con el centro de juegos. 
 
 A continuación, se detalla un poco más el proceso de desarrollo: 
 
-###Paso 1: 
+#### Paso 1
 
 En el primer paso para el desarrollo de este juego se inició por personalizar la interfaz gráfica de la base del juego, cambiando la dimensión y las imágenes de las cartas y agregando otros elementos a la ventana de la partida.  
 
-###Paso 2: 
+![[Markdown image](https://weibeld.net/assets/icons/markdown.png)](images/markdown.png){#fig:markdown_image}
+
+#### Paso 2 
 
 Seguidamente, se procedió a implementar las interfaces brindadas por el profesor a la base del “Memory Game” y se incorporó el patrón de diseño Singleton para que solo exista una única instancia del juego y así evitar que se creen repetidas. En la figura 4 se observa el método publico creado para acceder al constructor privado de la interfaz gráfica del juego y así lograr crear la única instancia que se va a utilizar.  
 
-###Paso 3:
+#### Paso 3
 
 Se incluye al juego la ventana principal del mismo, cuya descripción de elaboración se encuentra en definida en la Etapa 3 de la solución del problema del presente proyecto.  
 
-###Paso 4: 
+#### Paso 4 
 
 Se incorporó el método de “terminarPartida” , donde se guarda la fecha y hora en la que se finaliza la partida, se elimina la instancia y se verifica si la partida fue finalizada completamente o se terminó antes de completar el juego. A partir de esto se guarda el puntaje y se registra en el historial del jugador. Además, se almacena la información en el registro del centro de juegos.
 
-###Paso 5: 
+#### Paso 5 
 
 Para este último paso se implementa la clase “JMemory” cual contiene metodos como el “setCards()” que declara los 16 botones correspondientes a las 16 cartas del juego , las cuales inicialmente hacen uso del método setDisabledIcon() para ocultar la imagen de su reverso. Luego, contiene el método “btnEnable” el cual se encarga de saber si una carta se ha volteado. 
 
@@ -94,10 +95,10 @@ Al presionar la primera carta, mediante una condicional, se visualiza el icono q
 
 Los mejores puntajes están calculados en base a los jugadores que hayan obtenido la menor cantidad de puntos, ya que entre más intentos fallidos tengan, el puntaje será mucho mayor. 
 
-#Etapa 5:  
+## Etapa 5:  
 
 En esta etapa se busca la implementación del tercer juego…. 
 
-#Etapa 6: 
+## Etapa 6: 
 
 Sobre el manejo de archivos y excepciones…. 
