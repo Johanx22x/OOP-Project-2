@@ -1,6 +1,6 @@
 # Introducción
 
-En este reporte, busca desarrollar un centro de juegos y sus respectivos juegos utilizando 
+En este reporte,se busca desarrollar un centro de juegos y sus respectivos juegos utilizando 
 conceptos previamente definidos por el instructor, implementando el lenguaje de programación 
 Java y conceptos previamente analizados en el curso , de esta forma se logra crear una plataforma más estandarizada, 
 permitiendo la interacción con juegos desarrollados por otros grupos de trabajo.
