@@ -18,6 +18,10 @@ import java.io.FileNotFoundException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
+import juego1.TicTacToe;
+import juego2.Memory;
+import juego3.HiddenNumberGameUI;
+
 /**
  * Class that implements the register interface
  * 
@@ -174,7 +178,7 @@ public class Register implements iRegistro {
             FileWriter file = new FileWriter("records.txt");
             BufferedWriter buffer = new BufferedWriter(file);
             for (iRegistro record : records) {
-                buffer.write(record.getTipoJuego().getNombre() + "," + record.getJugador() + "," + record.getInicio() + ","
+                buffer.write(record.getTipoJuego().getNombre() + "," + record.getJugador().getNombre() + "," + record.getInicio() + ","
                         + record.getFinalizacion() + "," + record.getPuntaje() + "," + record.getEstadoFinalizado());
                 buffer.newLine();
             }
@@ -201,14 +205,27 @@ public class Register implements iRegistro {
                 String data = reader.nextLine();
                 String[] record = data.split(",");
 
-                Register newRecord = new Register(new Player(record[1]));
-                newRecord.setScore(Integer.parseInt(record[4]));
-                // newRecord.setGame(new Game(record[0])); // TODO: Change this
-                newRecord.setInicio(LocalDateTime.parse(record[2]));
-                newRecord.setFinalizacion(LocalDateTime.parse(record[3]));
-                newRecord.setFinished(Boolean.parseBoolean(record[5]));
-
-                records.add(newRecord);
+                // Check if the game is TicTacToe, Memory or HiddenNumber
+                iJuego game = null;
+                if (record[0].equals("Tic Tac Toe")) {
+                    game = new TicTacToe();
+                } else if (record[0].equals("Memory Game")) {
+                    game = new Memory();
+                } else if (record[0].equals("HiddenNumber")) {
+                    game = new HiddenNumberGameUI();
+                }
+                if (game != null) {
+                    iJugador player = new Player(record[1]);
+                    Register newRecord = new Register(player);
+                    newRecord.setGame(game);
+                    newRecord.setInicio(LocalDateTime.parse(record[2]));
+                    newRecord.setFinalizacion(LocalDateTime.parse(record[3]));
+                    newRecord.setScore(Integer.parseInt(record[4]));
+                    newRecord.setFinished(Boolean.parseBoolean(record[5]));
+                    records.add(newRecord);
+                } else {
+                    System.out.println("Error reading the file");
+                }
             }
             reader.close();
         } catch (FileNotFoundException e) {

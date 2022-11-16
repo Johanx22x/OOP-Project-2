@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,6 +19,8 @@ import interfaces.iJuego;
 import interfaces.iRegistro;
 import interfaces.iJugador;
 import interfaces.iCentroJuego;
+
+import register.Register;
 
 /**
  * Class that represents the Game Center
@@ -42,9 +43,15 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
         // Set frame properties
         super("Game Center");
         setSize(500, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         setResizable(false);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Register.writeRecords(records);
+                System.exit(0);
+            }
+        });
 
         // Set the player
         this.player = player;
@@ -155,6 +162,7 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
             game.iniciarPartida(player, this);
         } else if (command.equals("Exit")) {
             // Exit the application
+            Register.writeRecords(records);
             System.exit(0);
         }
     }
