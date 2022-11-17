@@ -238,12 +238,12 @@ Por otra parte, el manejo de excepciones se implementó de varias maneras, se us
 datos y opciones, también la estructura `try catch` para manejar excepciones correspondientes a entradas erroneas 
 y excepciones similares, en general el desarrollo del programa emplea manejo de excepciones para que el usuario 
 pueda disponer de la mayor cantidad de diversión sin caídas o errores del programa. Ejemplos del manejo de excepciones 
-se pueden visualizar en TODO.
+se pueden visualizar en [@fig:val1], [@fig:val2], [@fig:val3] y [@fig:val4].
 
-![Credenciales incorrectas](images/validation1.png){#fig:figura1}
+![Credenciales incorrectas](images/validation1.png){#fig:val1}
 
-![Espacios sin llenar](images/validation2.png){#fig:figura1}
+![Espacios sin llenar](images/validation2.png){#fig:val2}
 
-![Las contraseñas no coinciden](images/validation3.png){#fig:figura1}
+![Las contraseñas no coinciden](images/validation3.png){#fig:val3}
 
-![Registro de usuario existente](images/validation4.png){#fig:figura1}
+![Registro de usuario existente](images/validation4.png){#fig:val4}
