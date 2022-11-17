@@ -74,14 +74,14 @@ public class GameCenter extends JFrame implements iCentroJuego, ActionListener {
         JLabel lblWelcome = new JLabel("Welcome!");
         lblWelcome.setBounds(175, 50, 200, 25);
         lblWelcome.setFont(new Font("Arial", Font.BOLD, 30));
-        lblWelcome.setForeground(Color.BLACK);
+        lblWelcome.setForeground(Color.WHITE);
         background.add(lblWelcome);
 
         // Add the username label and center it
         final JLabel lblUsername = new JLabel(player.getNombre());
         lblUsername.setBounds(0, 100, 500, 25);
         lblUsername.setFont(new Font("Arial", Font.BOLD, 25));
-        lblUsername.setForeground(Color.BLACK);
+        lblUsername.setForeground(Color.WHITE);
         lblUsername.setHorizontalAlignment(JLabel.CENTER);
         background.add(lblUsername);
 
