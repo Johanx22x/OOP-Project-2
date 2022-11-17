@@ -118,7 +118,11 @@ demás usuarios y se almacena la hora de inicio y finalización con los puntos o
 fue finalizada con éxito. Además, se guarda el promedio de tiempo diario en el juego, que se obtiene 
 dividiendo la cantidad de días por la cantidad de horas y también se guarda la cantidad de partidas 
 realizadas. Exactamente igual al botón con la misma función del primer juego pero su recorrido se basa en 
-los registros del juego Memoria. 
+los registros del juego memoria, en la [@fig:figura2] y [@fig:figura2] se muestra el código utilizado.
+
+![Eventos del botón “Personal Stats”](images/fig2.png){#fig:figura2}
+
+![Código para calcular el promedio del tiempo en el juego y el total de partidas.](images/fig3.png){#fig:figura3}
 
 -- Los botones de `Start` y `Exit` cumplen las mismas funciones de inicio de partida y cierre de ventana 
 actual que en el primer juego. 
@@ -180,8 +184,10 @@ otros elementos a la ventana de la partida.
 
 Seguidamente, se procedió a implementar las interfaces brindadas por el profesor a la base del `Memory Game` y 
 se incorporó el patrón de diseño `Singleton` para que solo exista una única instancia del juego y así evitar 
-que se creen repetidas. En la figura 4 se observa el método público creado para acceder al constructor privado 
+que se creen repetidas. En la [@fig:figura4] se observa el método público creado para acceder al constructor privado 
 de la interfaz gráfica del juego y así lograr crear la única instancia que se va a utilizar.  
+
+![Método que retorna una instancia de la clase ](images/fig4.png){#fig:figura4}
 
 #### Paso 3
 
@@ -193,7 +199,9 @@ en la Etapa 3 de la solución del problema del presente proyecto.
 Se incorporó el método de `terminarPartida` , donde se guarda la fecha y hora en la que se finaliza la partida, 
 se elimina la instancia y se verifica si la partida fue finalizada completamente o se terminó antes de completar 
 el juego. A partir de esto se guarda el puntaje y se registra en el historial del jugador. Además, se almacena 
-la información en el registro del centro de juegos.
+la información en el registro del centro de juegos, ver [@fig:figura5].
+
+![Método que guarda la partida finalizada](images/fig5.png){#fig:figura5}
 
 #### Paso 5 
 
@@ -231,3 +239,11 @@ datos y opciones, también la estructura `try catch` para manejar excepciones co
 y excepciones similares, en general el desarrollo del programa emplea manejo de excepciones para que el usuario 
 pueda disponer de la mayor cantidad de diversión sin caídas o errores del programa. Ejemplos del manejo de excepciones 
 se pueden visualizar en TODO.
+
+![Credenciales incorrectas](images/validation1.png){#fig:figura1}
+
+![Espacios sin llenar](images/validation2.png){#fig:figura1}
+
+![Las contraseñas no coinciden](images/validation3.png){#fig:figura1}
+
+![Registro de usuario existente](images/validation4.png){#fig:figura1}
