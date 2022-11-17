@@ -205,7 +205,7 @@ encarga de saber si una carta se ha volteado.
 Al presionar la primera carta, mediante una condicional, se visualiza el icono que esta tiene, si al presionar 
 la segunda carta, el icono es igual, se suman 20 puntos al marcador, de lo contrario si mediante el método 
 `compare()` se demuestra que el icono de las cartas es diferente, esto gracias al método `getDescription()`, 
-se le suma 10 puntos . 
+se le suma 10 puntos. 
 
 Los mejores puntajes están calculados en base a los jugadores que hayan obtenido la menor cantidad de puntos, 
 ya que entre más intentos fallidos tengan, el puntaje será mucho mayor. 
