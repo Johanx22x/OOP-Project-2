@@ -35,18 +35,18 @@ interfaz `iRegistro` y contiene los records de partidas registradas, finalmente,
 referenciado de la interfaz `iJugador`. 
 
 En esta clase se agregan al `ArrayList` de `games` las clases correspondientes a los dos juegos creados 
-(Tic Tac Toe y Memory). Además del saludo mostrado en la ventana, se muestra el nombre de este gracias 
-a el método `getNombre` del atributo `player`. Se agregan la cantidad de botones correspondientes a 
+(Tic Tac Toe y Memory). Además del saludo mostrado en la ventana, se muestra el nombre del jugador gracias 
+al método `getNombre` del atributo `player`. Se agregan la cantidad de botones correspondientes a 
 cada opción de juego que se encuentre dentro de `games`, esto mediante un ciclo `for` que verifica que, 
 para cada elemento dentro del largo de la lista, se agregue un botón y mediante el método `getNombre`, 
 escribe el nombre del juego en cada uno de los botones creados. Además de esto, crea un botón para que 
-al ser seleccionado muestra el podio de la plataforma. 
+al ser seleccionado muestre el podio de la plataforma. 
 
 Gracias a los métodos `getToolTipText()` y `setToolTipText()` le permite al usuario obtener una pequeña 
-descripción del  juego que desea  seleccionar cuando se posiciona encima del botón correspondiente a este. 
+descripción del juego que desea seleccionar cuando se posiciona encima del botón correspondiente a este. 
 
-Mediante el método `actionPerformed`, y el getter `getActionCommand()` comprueba la selección del botón 
-que haya presionado el usuario, y basándose en esta, muestra en pantalla el menú de inicio del juego seleccionado. 
+Mediante el método `actionPerformed` y el getter `getActionCommand()` comprueba la selección del botón 
+que haya presionado el usuario y basándose en esta muestra en pantalla el menú de inicio del juego seleccionado. 
 
 ## Etapa 3: Menús para la visualización de estadísticas
 
@@ -55,7 +55,7 @@ En cuanto a los menús individuales para cada juego:
 - Tic Tac Toe: Dentro del método `iniciarPartida` de la clase `TicTacToe.java`, se define una nueva ventana, 
 la cual lleva por título el nombre del juego, además muestra los botones de: 
 
--- PersonalStatus: contiene un HashMap definido como `playedDays` el cual recibe datos tipo LocalDate e 
+-- PersonalStatus: Contiene un HashMap definido como `playedDays` el cual recibe datos tipo LocalDate e 
 Integer. Con un ciclo `for`, recorre los registros de juegos en el centro de juegos y mediante el método 
 `getRegistros`, obtiene los, registros de las partidas Tic Tac Toe, luego, de igual manera con base al 
 registro busca los registros cuyo nombre de jugador sea igual al del usuario que está solicitando el 

@@ -36,14 +36,14 @@ regrese al menú central de juegos.
 
 Se analiza en primera instancia desarrollar los siguientes juegos: 
 
-- Tic Tac Toe: El juego de gato, tradicional, aunque la partida se desarrolla de manera individual entre el usuario 
-y el computador, en el menú individual, se le brinda al usuario la opción de escoger el símbolo con el que desea 
-efectuar la partida, y inicia esta, ganando al completar una línea de 3 espacios con su símbolo de manera vertical, 
-horizontal y diagonalmente 
+- Tic Tac Toe: En el juego de gato tradicional la partida se debe desarrollar de manera individual entre el usuario 
+y el computador, en el menú principal del juego se le brinda al usuario la opción de escoger el símbolo con el que desea 
+efectuar la partida, gana quien complete una línea de 3 espacios con su símbolo de manera vertical, 
+horizontal y diagonalmente.
 
 - Memoria: Muestra al usuario en pantalla dieciséis tarjetas volteadas , permitiéndole al usuario escoger dos cartas 
-y comprobar si estas tienen la misma imagen en su reverso, si esto es correcto, suma 20 puntos al marcador del juego, 
-de lo contrario, si las cartas no coinciden , se voltean nuevamente y resta 10 puntos al puntaje del jugador. En este 
+y comprobar si estas tienen la misma imagen en su reverso, si esto es correcto, suma 20 puntos al marcador del juagador, 
+de lo contrario, si las cartas no coinciden , se voltean nuevamente y suma 10 puntos al puntaje del jugador. En este 
 juego también se pretende implementar el patrón de diseño `Singleton`. 
 
 Ambos juegos permiten al usuario finalizar la partida pulsando el botón de salida, almacenando en el registro la 
