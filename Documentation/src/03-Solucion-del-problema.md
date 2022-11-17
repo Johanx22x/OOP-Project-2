@@ -123,7 +123,6 @@ los registros del juego Memoria.
 -- Los botones de `Start` y `Exit` cumplen las mismas funciones de inicio de partida y cierre de ventana 
 actual que en el primer juego. 
 
-
 ## Etapa 4: Desarrollo de los juegos del equipo 
 
 ### Primer juego: 
@@ -142,22 +141,22 @@ presionarse muestra con una fuente de tamaño grande el simbolo previamente esco
 
 #### Paso 2
 
-Seguidamente, se implementan los metodos definidos en la interfaz `iJuego`, de esta forma es posible tener 
+Seguidamente, se implementan los métodos definidos en la interfaz `iJuego`, de esta forma es posible tener 
 acceso a los datos necesarios para identificar el juego e iniciar y finalizar las partidas. De este modo, 
-la partida es iniciada con el metodo `iniciarPartida`.
+la partida es iniciada con el método `iniciarPartida`.
 
 #### Paso 3 
 
-Por otro lado, se implementa el metodo `computerTurn`, donde se utiliza un algoritmo que genera números random, 
+Por otro lado, se implementa el método `computerTurn`, donde se utiliza un algoritmo que genera números random, 
 de esta forma el CPU es capaz de posicionarse sobre los botones que se encuentran sin presionar.
 
 #### Paso 4
 
-Por último, existe el metodo `calcWin()` el cúal se encarga de verificar que alguno de los dos jugadores haya 
-ganado, si este metodo detecta que uno de los jugadores ganó, o existe un empate (todos los botones fueron 
-presionados) entonces el juego termina y se llama al metodo `terminarPartida`, para que registre el tiempo 
+Por último, existe el método `calcWin()` el cúal se encarga de verificar que alguno de los dos jugadores haya 
+ganado, si este método detecta que uno de los jugadores ganó, o existe un empate (todos los botones fueron 
+presionados) entonces el juego termina y se llama al método `terminarPartida`, para que registre el tiempo 
 de finalización y destruya el frame de juego, seguidamente se añade el registro de juego al centro de juegos, 
-utilizando el metodo proporcionado por la interfaz `iCentroJuego`.
+utilizando el método proporcionado por la interfaz `iCentroJuego`.
 
 ### Segundo juego: 
 
@@ -181,7 +180,7 @@ otros elementos a la ventana de la partida.
 
 Seguidamente, se procedió a implementar las interfaces brindadas por el profesor a la base del `Memory Game` y 
 se incorporó el patrón de diseño `Singleton` para que solo exista una única instancia del juego y así evitar 
-que se creen repetidas. En la figura 4 se observa el método publico creado para acceder al constructor privado 
+que se creen repetidas. En la figura 4 se observa el método público creado para acceder al constructor privado 
 de la interfaz gráfica del juego y así lograr crear la única instancia que se va a utilizar.  
 
 #### Paso 3
@@ -198,7 +197,7 @@ la información en el registro del centro de juegos.
 
 #### Paso 5 
 
-Para este último paso se implementa la clase `JMemory` cual contiene metodos como el `setCards()` que declara 
+Para este último paso se implementa la clase `JMemory` cual contiene métodos como el `setCards()` que declara 
 los 16 botones correspondientes a las 16 cartas del juego , las cuales inicialmente hacen uso del método 
 `setDisabledIcon()` para ocultar la imagen de su reverso. Luego, contiene el método `btnEnable()` el cual se 
 encarga de saber si una carta se ha volteado. 
